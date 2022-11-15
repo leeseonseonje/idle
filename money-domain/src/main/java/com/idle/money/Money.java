@@ -23,4 +23,17 @@ public class Money {
     private Member member;
 
     private int amount;
+
+    public void plusAmount() {
+        this.amount += 1000;
+    }
+
+    private Money(Member member, int amount) {
+        this.member = member;
+        this.amount = amount;
+    }
+
+    public static Money of(Member member) {
+        return new Money(member, 0);
+    }
 }

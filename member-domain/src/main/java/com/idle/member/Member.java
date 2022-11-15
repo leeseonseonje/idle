@@ -20,4 +20,12 @@ public class Member {
     private Long id;
 
     private String email;
+
+    private Member(String email) {
+        this.email = email;
+    }
+
+    public static Member of(String email) {
+        return new Member(email);
+    }
 }
