@@ -1,5 +1,6 @@
 package com.idle.member;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,11 +21,14 @@ public class Member {
 
     private String email;
 
+    @Builder
     private Member(String email) {
         this.email = email;
     }
 
     public static Member of(String email) {
-        return new Member(email);
+        return Member.builder()
+                .email(email)
+                .build();
     }
 }
