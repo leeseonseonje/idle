@@ -24,10 +24,6 @@ public class Money {
 
     private int amount;
 
-    public void plusAmount() {
-        this.amount += 1000;
-    }
-
     private Money(Member member, int amount) {
         this.member = member;
         this.amount = amount;
@@ -35,5 +31,9 @@ public class Money {
 
     public static Money of(Member member) {
         return new Money(member, 0);
+    }
+
+    public void plusAmount() {
+        this.amount += 1000;
     }
 }
