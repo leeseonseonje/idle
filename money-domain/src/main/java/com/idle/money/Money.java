@@ -1,6 +1,7 @@
 package com.idle.money;
 
 import com.idle.member.Member;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,13 +25,16 @@ public class Money {
 
     private int amount;
 
-    private Money(Member member, int amount) {
+    @Builder
+    private Money(Member member) {
         this.member = member;
-        this.amount = amount;
+        this.amount = 0;
     }
 
     public static Money of(Member member) {
-        return new Money(member, 0);
+        return Money.builder()
+                .member(member)
+                .build();
     }
 
     public void plusAmount() {
