@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -13,8 +15,9 @@ public class MoneyService {
 
     private final MoneyRepository moneyRepository;
 
-    public void idlePlusMoney(Long memberId) {
-        Money money = moneyRepository.findByMemberId(memberId);
-        money.plusAmount();
+        public void sprinkleMoney(List<Money> membersMoney) {
+        for (Money money : membersMoney) {
+            money.plusAmount();
+        }
     }
 }

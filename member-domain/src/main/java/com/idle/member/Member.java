@@ -30,5 +30,6 @@ public class Member {
         return Member.builder()
                 .email(email)
                 .build();
+
     }
 }
