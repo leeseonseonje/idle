@@ -1,13 +1,13 @@
 package com.idle.member;
 
+import com.idle.money.Money;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
 
 @Entity
@@ -19,10 +19,15 @@ public class Member {
     @GeneratedValue
     private Long id;
 
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "money_id")
+    private Money money;
+
     private String email;
 
     @Builder
     private Member(String email) {
+        this.money = new Money();
         this.email = email;
     }
 
@@ -30,6 +35,5 @@ public class Member {
         return Member.builder()
                 .email(email)
                 .build();
-
     }
 }

@@ -32,4 +32,8 @@ public class Item {
     private int star;
 
     private boolean isWear;
+
+    public void upgrade() {
+        this.upgrade++;
+    }
 }

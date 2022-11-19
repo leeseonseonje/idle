@@ -1,7 +1,5 @@
 package com.idle.money.service;
 
-import com.idle.member.Member;
-import com.idle.member.repository.MemberRepository;
 import com.idle.money.Money;
 import com.idle.money.repository.MoneyRepository;
 import org.junit.jupiter.api.Test;
@@ -16,8 +14,6 @@ import static org.assertj.core.api.Assertions.*;
 @DataJpaTest
 class MoneyServiceTest {
 
-    @Autowired
-    MemberRepository memberRepository;
 
     @Autowired
     MoneyRepository moneyRepository;
@@ -40,9 +36,7 @@ class MoneyServiceTest {
     private List<Money> createMembersMoney() {
         List<Money> membersMoney = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            Member member = Member.of("member@eamil.com");
-            Money money = Money.of(member);
-            memberRepository.save(member);
+            Money money = new Money();
             moneyRepository.save(money);
             membersMoney.add(money);
         }
