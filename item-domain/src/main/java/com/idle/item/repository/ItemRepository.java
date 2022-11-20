@@ -1,6 +1,6 @@
-package com.idel.item.repository;
+package com.idle.item.repository;
 
-import com.idel.item.Item;
+import com.idle.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {

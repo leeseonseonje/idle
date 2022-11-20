@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DomainMemberApplication {
+public class IdleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DomainMemberApplication.class, args);
+        SpringApplication.run(IdleApplication.class, args);
     }
-
 }

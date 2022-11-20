@@ -1,5 +1,6 @@
 package com.idle.weapon.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,19 @@ public class Weapon {
 
     @Enumerated(STRING)
     private Grade grade;
+
+    @Builder
+    private Weapon(String name, Grade grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+
+    public static Weapon of(String name, Grade grade) {
+        return Weapon.builder()
+                .name(name)
+                .grade(grade)
+                .build();
+    }
+
+
 }

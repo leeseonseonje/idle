@@ -1,4 +1,5 @@
 rootProject.name = 'idle'
+include 'main'
 include 'member-domain'
 include 'money-domain'
 include 'item-domain'

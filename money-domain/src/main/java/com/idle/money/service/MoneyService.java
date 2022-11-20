@@ -1,6 +1,6 @@
 package com.idle.money.service;
 
-import com.idle.money.Money;
+import com.idle.money.domain.Money;
 import com.idle.money.repository.MoneyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class MoneyService {
 
         public void sprinkleMoney(List<Money> membersMoney) {
         for (Money money : membersMoney) {
-            money.plusAmount();
+            money.plusAmount(1000);
         }
     }
 }

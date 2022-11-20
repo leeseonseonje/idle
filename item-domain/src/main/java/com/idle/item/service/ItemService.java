@@ -1,7 +1,7 @@
-package com.idel.item.service;
+package com.idle.item.service;
 
-import com.idel.item.Item;
-import com.idel.item.repository.ItemRepository;
+import com.idle.item.Item;
+import com.idle.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ItermService {
+public class ItemService {
 
     private final ItemRepository itemRepository;
 
@@ -17,6 +17,6 @@ public class ItermService {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템 입니다."));
 
-        item.upgrade();
+        item.upgrade(item.getMember().getMoney());
     }
 }

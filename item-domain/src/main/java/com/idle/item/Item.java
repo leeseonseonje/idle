@@ -1,7 +1,9 @@
-package com.idel.item;
+package com.idle.item;
 
 import com.idle.member.Member;
+import com.idle.money.domain.Money;
 import com.idle.weapon.domain.Weapon;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,7 +35,25 @@ public class Item {
 
     private boolean isWear;
 
-    public void upgrade() {
+    @Builder
+    private Item(Member member, Weapon weapon) {
+        this.member = member;
+        this.weapon = weapon;
+        this.upgrade = 0;
+        this.star = 0;
+        this.isWear = false;
+    }
+
+    public static Item of(Member member, Weapon weapon) {
+        return Item.builder()
+                .member(member)
+                .weapon(weapon)
+                .build();
+    }
+
+
+    public void upgrade(Money money) {
+        money.payment(1000 + upgrade);
         this.upgrade++;
     }
 }
