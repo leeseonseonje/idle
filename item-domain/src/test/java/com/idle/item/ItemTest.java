@@ -3,6 +3,7 @@ package com.idle.item;
 import com.idle.member.Member;
 import com.idle.money.domain.Money;
 import com.idle.money.exception.ShortOfMoneyException;
+import com.idle.weapon.NAME;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;
@@ -51,7 +52,7 @@ class ItemTest {
     }
 
     private void createItem() {
-        sut = Item.of(Member.of("email"), Weapon.of("검", Grade.NORMAL));
+        sut = Item.of(Member.of("email"), Weapon.of(NAME.SWORD, Grade.NORMAL));
     }
 
     private void createMoney(int amount) {

@@ -22,12 +22,10 @@ public class InitDataTest {
     @Test
     void initTest() {
         List<Weapon> result = weaponMemoryRepository.findAll();
-        assertThat(result.size()).isEqualTo(12);
-        assertThat(result).extracting("name")
-                .containsExactly("검", "검", "검", "검", "검", "검",
-                        "도", "도", "도", "도", "도", "도");
+        assertThat(result.size()).isEqualTo(18);
         assertThat(result).extracting("grade")
                 .containsExactly(NORMAL, RARE, EPIC, UNIQUE, LEGENDARY, END,
+                        NORMAL, RARE, EPIC, UNIQUE, LEGENDARY, END,
                         NORMAL, RARE, EPIC, UNIQUE, LEGENDARY, END);
     }
 }

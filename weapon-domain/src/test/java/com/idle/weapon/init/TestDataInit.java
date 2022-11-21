@@ -1,5 +1,6 @@
 package com.idle.weapon.init;
 
+import com.idle.weapon.NAME;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import com.idle.weapon.repository.WeaponMemoryRepository;
@@ -24,10 +25,13 @@ public class TestDataInit {
 
     private void initDbData() {
         for (Grade grade : values()) {
-            weaponRepository.save(Weapon.of("검", grade));
+            weaponRepository.save(Weapon.of(NAME.SWORD, grade));
         }
         for (Grade grade : values()) {
-            weaponRepository.save(Weapon.of("도", grade));
+            weaponRepository.save(Weapon.of(NAME.SPEAR, grade));
+        }
+        for (Grade grade : values()) {
+            weaponRepository.save(Weapon.of(NAME.AXE, grade));
         }
     }
 }

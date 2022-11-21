@@ -3,6 +3,7 @@ package com.idle.item.service;
 import com.idle.item.Item;
 import com.idle.item.repository.ItemRepository;
 import com.idle.member.Member;
+import com.idle.weapon.NAME;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,7 @@ class ItemServiceTest {
     @DisplayName("item을 조회해서 업그레이드")
     void findByItemId_upgrade() {
         sut = new ItemService(itemRepository);
-        Item item = Item.of(Member.of("email"), Weapon.of("검", Grade.NORMAL));
+        Item item = Item.of(Member.of("email"), Weapon.of(NAME.SWORD, Grade.NORMAL));
         Item savedItem = itemRepository.save(item);
         savedItem.getMember().getMoney().plusAmount(1000);
 
