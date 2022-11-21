@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
-class ItermServiceTest {
+class ItemServiceTest {
 
     @Autowired
     ItemRepository itemRepository;
@@ -24,7 +24,7 @@ class ItermServiceTest {
     @DisplayName("item을 조회해서 업그레이드")
     void findByItemId_upgrade() {
         sut = new ItemService(itemRepository);
-        Item item = Item.of(Member.of("eamil"), Weapon.of("검", Grade.NORMAL));
+        Item item = Item.of(Member.of("email"), Weapon.of("검", Grade.NORMAL));
         Item savedItem = itemRepository.save(item);
         savedItem.getMember().getMoney().plusAmount(1000);
 

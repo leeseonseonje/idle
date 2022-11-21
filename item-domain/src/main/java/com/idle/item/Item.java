@@ -51,7 +51,6 @@ public class Item {
                 .build();
     }
 
-
     public void upgrade(Money money) {
         money.payment(1000 + upgrade);
         this.upgrade++;
