@@ -1,7 +1,5 @@
 package com.idle.weapon.domain;
 
-import lombok.AllArgsConstructor;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
@@ -24,11 +22,7 @@ public enum Grade {
         this.number = number;
     }
 
-    public Grade from(Integer number) {
-        Grade grade = map.getOrDefault(number, null);
-        if (grade == null) {
-            throw new IllegalStateException("꽝");
-        }
-        return grade;
+    public static Grade get(Integer number) {
+        return map.get(number);
     }
 }

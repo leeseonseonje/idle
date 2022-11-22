@@ -1,10 +1,15 @@
-package com.idle.store.domain;
+package com.idle.shop.domain;
 
+import com.idle.money.domain.Money;
+import com.idle.shop.domain.product.Product;
+import com.idle.weapon.domain.Weapon;
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import java.util.function.Supplier;
 
 import static lombok.AccessLevel.*;
 
@@ -32,5 +37,10 @@ public class Shop {
                 .product(product)
                 .price(price)
                 .build();
+    }
+
+    public <T> T purchase(Money money, int price, T type) {
+        money.payment(price);
+        return product.getExecute().get(type);
     }
 }
