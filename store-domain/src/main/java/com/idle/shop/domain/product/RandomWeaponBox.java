@@ -18,16 +18,11 @@ public class RandomWeaponBox {
     }
 
     private Grade randomGrade() {
-        int number = randomNumber(1000);
+        int random = randomNumber(1000);
 
-        if (number >= 500 && number <= 599) {
-            return Grade.NORMAL;
-        } else if (number >= 790 && number <= 799) {
-            return Grade.RARE;
-        } else if (number >= 895 && number <= 899) {
-            return Grade.EPIC;
-        } else if (number == 999) {
-            return Grade.UNIQUE;
+        Grade grade = Grade.randomGrade(random);
+        if (grade != null) {
+            return grade;
         } else {
             throw new BoomException("꽝");
         }
