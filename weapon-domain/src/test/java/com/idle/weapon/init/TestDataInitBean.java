@@ -1,7 +1,5 @@
 package com.idle.weapon.init;
 
-import com.idle.weapon.repository.WeaponMemoryRepository;
-import com.idle.weapon.repository.WeaponRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

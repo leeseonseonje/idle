@@ -1,12 +1,12 @@
 package com.idle.shop.domain.product;
 
-import com.idle.weapon.Name;
+import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.idle.weapon.Name.*;
+import static com.idle.weapon.domain.Name.*;
 import static com.idle.weapon.domain.Grade.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -25,8 +25,7 @@ public class Item {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "weapon_id")
+    @Embedded
     private Weapon weapon;
 
     private int upgrade;

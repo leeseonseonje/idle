@@ -3,7 +3,7 @@ package com.idle.item;
 import com.idle.member.Member;
 import com.idle.money.domain.Money;
 import com.idle.money.exception.ShortOfMoneyException;
-import com.idle.weapon.Name;
+import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;

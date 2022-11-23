@@ -1,7 +1,7 @@
 package com.idle.shop.domain.product;
 
 import com.idle.shop.exception.BoomException;
-import com.idle.weapon.Name;
+import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 

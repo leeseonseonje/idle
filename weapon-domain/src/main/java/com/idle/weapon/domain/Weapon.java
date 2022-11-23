@@ -1,6 +1,6 @@
 package com.idle.weapon.domain;
 
-import com.idle.weapon.Name;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +10,10 @@ import javax.persistence.*;
 import static javax.persistence.EnumType.*;
 import static lombok.AccessLevel.*;
 
-@Entity
 @Getter
+@Embeddable
 @NoArgsConstructor(access = PROTECTED)
 public class Weapon {
-
-    @Id
-    @GeneratedValue
-    private Long id;
 
     private Name name;
 

@@ -1,4 +1,4 @@
-package com.idle.weapon;
+package com.idle.weapon.domain;
 
 public enum Name {
     SWORD,

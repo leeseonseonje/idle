@@ -1,11 +1,8 @@
 package com.idle.weapon.init.test;
 
-import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
-import com.idle.weapon.repository.WeaponMemoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;

@@ -1,10 +1,8 @@
 package com.idle.weapon.init;
 
-import com.idle.weapon.Name;
+import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
-import com.idle.weapon.repository.WeaponMemoryRepository;
-import com.idle.weapon.repository.WeaponRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;

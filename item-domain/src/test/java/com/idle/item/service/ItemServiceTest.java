@@ -3,7 +3,7 @@ package com.idle.item.service;
 import com.idle.item.Item;
 import com.idle.item.repository.ItemRepository;
 import com.idle.member.Member;
-import com.idle.weapon.Name;
+import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;

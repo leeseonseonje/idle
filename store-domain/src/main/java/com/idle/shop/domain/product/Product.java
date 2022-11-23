@@ -1,7 +1,10 @@
 package com.idle.shop.domain.product;
 
+import com.idle.weapon.domain.Weapon;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @AllArgsConstructor
