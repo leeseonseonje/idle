@@ -1,6 +1,6 @@
 package com.idle.item.service;
 
-import com.idle.item.Item;
+import com.idle.item.domain.Item;
 import com.idle.item.repository.ItemRepository;
 import com.idle.weapon.domain.Weapon;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static org.springframework.data.domain.Sort.*;
+import static org.springframework.data.domain.Sort.Direction.*;
 
 @Service
 @Transactional
@@ -23,9 +26,13 @@ public class ItemService {
         item.upgrade(item.getMember().getMoney());
     }
 
-    public void synthesis(List<Long> itemIds) {
-        List<Item> items = itemRepository.findAllById(itemIds);
+    public Item synthesis(List<Long> itemIds) {
+        List<Item> items = itemRepository.findByIds(itemIds, by(ASC, "weapon.grade"));
 
         Weapon legendaryWeapon = items.get(0).synthesis(items);
+
+        Item item = Item.of(items.get(0).getMember(), legendaryWeapon);
+        itemRepository.deleteAll(items);
+        return itemRepository.save(item);
     }
 }

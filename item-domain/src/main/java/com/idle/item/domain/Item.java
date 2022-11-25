@@ -1,4 +1,4 @@
-package com.idle.item;
+package com.idle.item.domain;
 
 import com.idle.item.exception.SynthesisFailedException;
 import com.idle.member.Member;
@@ -13,6 +13,7 @@ import javax.persistence.*;
 
 import java.util.List;
 
+import static com.idle.weapon.domain.Grade.*;
 import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.*;
 
@@ -61,7 +62,7 @@ public class Item {
 
     public Weapon synthesis(List<Item> items) {
         ingredientCheck(items);
-        return Weapon.of(this.getWeapon().getName(), Grade.LEGENDARY);
+        return Weapon.of(this.getWeapon().getName(), LEGENDARY);
     }
 
     private void ingredientCheck(List<Item> items) {
@@ -75,14 +76,14 @@ public class Item {
 
     private void ingredientNameCheck(List<Item> items) {
         for (Item item : items) {
-            if (this.getWeapon().getName() == item.getWeapon().getName()) {
+            if (this.getWeapon().getName() != item.getWeapon().getName()) {
                 throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
             }
         }
     }
 
     private void ingredientUpgradeCheck(List<Item> items, int i) {
-        if (items.get(i).getUpgrade() <= 100) {
+        if (items.get(i).getUpgrade() < 100) {
             throw new SynthesisFailedException("업그레이드 횟수가 모자릅니다.");
         }
     }

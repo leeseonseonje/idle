@@ -15,9 +15,9 @@ import static lombok.AccessLevel.*;
 @NoArgsConstructor(access = PROTECTED)
 public class Weapon {
 
+    @Enumerated(STRING)
     private Name name;
 
-    @Enumerated(STRING)
     private Grade grade;
 
     @Builder
