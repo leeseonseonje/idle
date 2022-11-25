@@ -4,8 +4,6 @@ import com.idle.money.domain.Money;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ShopServiceTest {
 
     @Test
@@ -15,7 +13,5 @@ class ShopServiceTest {
         money.plusAmount(1000);
 
         Weapon weapon = sut.randomWeaponBox(money);
-
-
     }
 }
