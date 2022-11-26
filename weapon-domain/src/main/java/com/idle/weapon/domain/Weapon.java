@@ -1,6 +1,5 @@
 package com.idle.weapon.domain;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,9 +30,5 @@ public class Weapon {
                 .name(name)
                 .grade(grade)
                 .build();
-    }
-
-    public static Weapon type() {
-        return Weapon.builder().build();
     }
 }

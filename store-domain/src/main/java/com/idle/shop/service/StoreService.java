@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ShopService {
+public class StoreService {
 
     private final ApplicationContext applicationContext;
 

@@ -12,10 +12,10 @@ import static com.idle.shop.domain.weapon.Product.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-class ShopServiceTest {
+class StoreServiceTest {
 
     @Autowired
-    ShopService sut;
+    StoreService sut;
 
     @Test
     @DisplayName("랜덤으로 무기를 받는다.")
