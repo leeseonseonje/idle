@@ -1,6 +1,5 @@
 package com.idle.item.domain;
 
-import com.idle.item.ItemFactory;
 import com.idle.money.domain.Money;
 import com.idle.money.exception.ShortOfMoneyException;
 import com.idle.weapon.domain.Weapon;

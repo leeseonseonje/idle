@@ -32,7 +32,8 @@ class ItemServiceTest {
     @DisplayName("item을 조회해서 업그레이드")
     void findByItemId_upgrade() {
         ItemService sut = new ItemService(itemRepository);
-        Item item = Item.of(Member.of("email"), Weapon.of(Name.SWORD, Grade.NORMAL));
+        Member member = createMember(1000);
+        Item item = Item.of(member, Weapon.of(Name.SWORD, Grade.NORMAL));
         Item savedItem = itemRepository.save(item);
         savedItem.getMember().getMoney().plusAmount(1000);
 

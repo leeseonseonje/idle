@@ -67,11 +67,8 @@ public class Item {
 
     private void ingredientCheck(List<Item> items) {
         ingredientNameCheck(items);
-
-        for (int i = 0; i < items.size(); i++) {
-            ingredientUpgradeCheck(items, i);
-            ingredientGradeCheck(items, i);
-        }
+        ingredientUpgradeCheck(items);
+        ingredientGradeCheck(items);
     }
 
     private void ingredientNameCheck(List<Item> items) {
@@ -82,15 +79,19 @@ public class Item {
         }
     }
 
-    private void ingredientUpgradeCheck(List<Item> items, int i) {
-        if (items.get(i).getUpgrade() < 100) {
-            throw new SynthesisFailedException("업그레이드 횟수가 모자릅니다.");
+    private void ingredientUpgradeCheck(List<Item> items) {
+        for (Item item : items) {
+            if (item.getUpgrade() < 100) {
+                throw new SynthesisFailedException("업그레이드 횟수가 모자릅니다.");
+            }
         }
     }
 
-    private void ingredientGradeCheck(List<Item> items, int i) {
-        if (items.get(i).getWeapon().getGrade() != Grade.values()[i]) {
-            throw new SynthesisFailedException("등급이 맞지 않습니다.");
+    private void ingredientGradeCheck(List<Item> items) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getWeapon().getGrade() != Grade.values()[i]) {
+                throw new SynthesisFailedException("등급이 맞지 않습니다.");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.idle.shop.domain.product;
+package com.idle.shop.domain;
 
 import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
@@ -58,7 +58,7 @@ class RandomWeaponBoxTest {
     }
 
     private Weapon getWeapon(int nameRandom, int gradeRandom) {
-        Name name = randomGet(nameRandom);
+        Name name = get(nameRandom);
         Grade grade = randomGrade(gradeRandom);
 
         return Weapon.of(name, grade);

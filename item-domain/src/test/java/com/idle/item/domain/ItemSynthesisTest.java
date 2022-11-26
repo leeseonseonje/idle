@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.idle.item.ItemFactory.*;
+import static com.idle.item.domain.ItemFactory.*;
 import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Name.*;
 import static org.assertj.core.api.Assertions.*;

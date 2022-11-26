@@ -5,7 +5,7 @@ public enum Name {
     SPEAR,
     AXE;
 
-    public static Name randomGet(int random) {
+    public static Name get(int random) {
         return values()[random];
     }
 }

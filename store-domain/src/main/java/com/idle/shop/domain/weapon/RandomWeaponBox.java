@@ -1,15 +1,22 @@
-package com.idle.shop.domain.product;
+package com.idle.shop.domain.weapon;
 
 import com.idle.shop.exception.BoomException;
-import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Grade;
+import com.idle.weapon.domain.Name;
 import com.idle.weapon.domain.Weapon;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomWeaponBox {
+@Component
+public class RandomWeaponBox extends WeaponStore {
 
-    public Weapon randomWeapon() {
+    @Override
+    public Weapon getWeapon() {
+        return randomWeapon();
+    }
+
+    private Weapon randomWeapon() {
         Name name = getWeaponName(Name.values().length);
 
         Grade grade = randomGrade();
@@ -30,7 +37,7 @@ public class RandomWeaponBox {
 
     private Name getWeaponName(int bound) {
         int number = randomNumber(bound);
-        return Name.randomGet(number);
+        return Name.get(number);
     }
 
     private int randomNumber(int bound) {

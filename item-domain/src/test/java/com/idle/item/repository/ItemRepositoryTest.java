@@ -1,6 +1,5 @@
 package com.idle.item.repository;
 
-import com.idle.item.ItemFactory;
 import com.idle.item.domain.Item;
 import com.idle.member.Member;
 import com.idle.member.repository.MemberRepository;
@@ -9,12 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
 import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Name.*;
+import static org.assertj.core.api.Assertions.*;
+import static org.springframework.data.domain.Sort.*;
+import static org.springframework.data.domain.Sort.Direction.*;
 
 @DataJpaTest
 
@@ -43,9 +44,9 @@ class ItemRepositoryTest {
     }
     @Test
     void item_ids_find() {
-        List<Item> items = itemRepository.findByIds(List.of(3L, 4L, 5L, 6L), Sort.by(Sort.Direction.ASC, "weapon.grade"));
-        for (Item item : items) {
-            System.out.println(item.getWeapon().getGrade());
-        }
+        List<Item> items = itemRepository.findByIds(List.of(3L, 4L, 5L, 6L), by(ASC, "weapon.grade"));
+
+        assertThat(items).extracting("weapon.grade")
+                .containsExactly(NORMAL, RARE, EPIC, UNIQUE);
     }
 }
