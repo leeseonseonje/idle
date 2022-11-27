@@ -60,7 +60,8 @@ public class Item {
         this.upgrade++;
     }
 
-    public void gradeUp(int random) {
+    public void gradeUp(Money money, int random) {
+        money.payment(1000);
         this.weapon.gradeUp(random);
     }
 

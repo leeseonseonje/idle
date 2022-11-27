@@ -8,7 +8,7 @@ public enum Grade {
 
     NORMAL(r -> {
         if (r >= 990) {
-            return valueOf("EPIC");
+            return valueOf("RARE");
         }
         throw new GradeUpFailedException();
     }),
@@ -19,7 +19,7 @@ public enum Grade {
         throw new GradeUpFailedException();
     }),
     EPIC(r -> {
-        if (r >= 997) {
+        if (r == 999) {
             return valueOf("UNIQUE");
         }
         throw new GradeUpFailedException();
