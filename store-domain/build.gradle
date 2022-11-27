@@ -7,4 +7,5 @@ dependencies {
     implementation project(":main")
     implementation project(":money-domain")
     implementation project(":weapon-domain")
+    implementation project(":app-random")
 }

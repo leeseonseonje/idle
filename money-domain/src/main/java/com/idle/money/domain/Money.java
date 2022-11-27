@@ -23,13 +23,13 @@ public class Money {
         this.amount += amount;
     }
 
-    public void payment(int amount) {
-        balanceCheck(amount);
-        this.amount -= amount;
+    public void payment(int price) {
+        balanceCheck(price);
+        this.amount -= price;
     }
 
-    private void balanceCheck(int amount) {
-        if (this.amount < amount) {
+    private void balanceCheck(int price) {
+        if (this.amount < price) {
             throw new ShortOfMoneyException("돈이 부족합니다.");
         }
     }

@@ -26,6 +26,10 @@ public class ItemService {
         item.upgrade(item.getMember().getMoney());
     }
 
+    public void gradeUp(Long itemId) {
+
+    }
+
     public Item synthesis(List<Long> itemIds) {
         List<Item> items = itemRepository.findByIds(itemIds, by(ASC, "weapon.grade"));
 

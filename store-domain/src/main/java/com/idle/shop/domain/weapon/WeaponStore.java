@@ -7,8 +7,8 @@ public abstract class WeaponStore {
 
     protected abstract Weapon getWeapon();
 
-    public Weapon purchase(Money money, int amount) {
-        money.payment(amount);
+    public Weapon purchase(Money money, int price) {
+        money.payment(price);
         return getWeapon();
     }
 }

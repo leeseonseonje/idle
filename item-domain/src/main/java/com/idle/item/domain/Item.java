@@ -60,6 +60,10 @@ public class Item {
         this.upgrade++;
     }
 
+    public void gradeUp(int random) {
+        this.weapon.gradeUp(random);
+    }
+
     public Weapon synthesis(List<Item> items) {
         ingredientCheck(items);
         return Weapon.of(this.getWeapon().getName(), LEGENDARY);

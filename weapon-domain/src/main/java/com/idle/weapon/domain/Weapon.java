@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static com.idle.weapon.domain.Grade.*;
 import static javax.persistence.EnumType.*;
 import static lombok.AccessLevel.*;
 
@@ -30,5 +31,14 @@ public class Weapon {
                 .name(name)
                 .grade(grade)
                 .build();
+    }
+
+    public static Weapon randomWeapon(int random) {
+        Name name = Name.get(random);
+        return Weapon.of(name, NORMAL);
+    }
+
+    public void gradeUp(int random) {
+        this.grade = this.grade.up(random);
     }
 }
