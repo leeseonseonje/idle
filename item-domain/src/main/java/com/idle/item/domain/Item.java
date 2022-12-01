@@ -100,10 +100,11 @@ public class Item {
         }
     }
 
-    public void starUp(Item legendary2) {
+    public void legendarySynthesis(Item legendary2) {
         if (legendaryGradeCheck(legendary2)) {
             if (sameWeaponNameCheck(legendary2)) {
                 this.star++;
+                this.upgrade += legendary2.getUpgrade();
             } else {
                 throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
             }

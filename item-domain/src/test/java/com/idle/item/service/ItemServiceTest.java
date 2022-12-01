@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Grade.UNIQUE;
@@ -76,6 +77,23 @@ class ItemServiceTest {
             }
         }
         itemRepository.saveAll(items);
+    }
+
+    @Test
+    @DisplayName("레전더리 무기 두개를 합성하면 별이 증가한다. 하나의 무기는 삭제된다.")
+    public void legendary_plus_legendary_star_up() {
+        ItemService sut = new ItemService(itemRepository, null);
+        Member member = createMember(1000);
+        Item legendary1 = createItem(member, Weapon.of(SWORD, LEGENDARY));
+        Item legendary2 = createItem(member, Weapon.of(SWORD, LEGENDARY));
+        legendary2.upgrade(member.getMoney());
+
+        sut.legendarySynthesis(List.of(legendary1.getId(), legendary2.getId()));
+
+        assertThat(legendary1.getStar()).isEqualTo(1);
+        assertThat(legendary1.getUpgrade()).isEqualTo(1);
+        assertThatThrownBy(() -> itemRepository.findById(legendary2.getId()).get())
+                .isInstanceOf(NoSuchElementException.class);
     }
 
     private Member createMember(int amount) {

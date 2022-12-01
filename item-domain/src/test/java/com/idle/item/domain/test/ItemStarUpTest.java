@@ -2,6 +2,7 @@ package com.idle.item.domain.test;
 
 import com.idle.item.domain.Item;
 import com.idle.item.exception.SynthesisFailedException;
+import com.idle.money.domain.Money;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,14 +15,20 @@ import static org.assertj.core.api.Assertions.*;
 public class ItemStarUpTest {
 
     @Test
-    @DisplayName("같은 종류의 레전더리 등급 무기를 2개 합성하면 별 증가")
+    @DisplayName("같은 종류의 레전더리 등급 무기를 2개 합성하면 별 증가 업그레이드는 합쳐짐")
     void legendary_plus_legendary_star_up() {
+        Money money = createMoney(10000000);
         Item legendary1 = createItem(Weapon.of(SWORD, LEGENDARY));
         Item legendary2 = createItem(Weapon.of(SWORD, LEGENDARY));
+        for (int i = 0; i < 100; i++) {
+            legendary1.upgrade(money);
+            legendary2.upgrade(money);
+        }
 
-        legendary1.starUp(legendary2);
+        legendary1.legendarySynthesis(legendary2);
 
         assertThat(legendary1.getStar()).isEqualTo(1);
+        assertThat(legendary1.getUpgrade()).isEqualTo(200);
     }
 
     @Test
@@ -30,7 +37,7 @@ public class ItemStarUpTest {
         Item legendary = createItem(Weapon.of(SWORD, LEGENDARY));
         Item unique = createItem(Weapon.of(SWORD, UNIQUE));
 
-        assertThatThrownBy(() -> legendary.starUp(unique))
+        assertThatThrownBy(() -> legendary.legendarySynthesis(unique))
                 .isInstanceOf(SynthesisFailedException.class);
     }
 
@@ -40,7 +47,7 @@ public class ItemStarUpTest {
         Item legendary1 = createItem(Weapon.of(SWORD, LEGENDARY));
         Item legendary2 = createItem(Weapon.of(AXE, LEGENDARY));
 
-        assertThatThrownBy(() -> legendary1.starUp(legendary2))
+        assertThatThrownBy(() -> legendary1.legendarySynthesis(legendary2))
                 .isInstanceOf(SynthesisFailedException.class);
     }
 }

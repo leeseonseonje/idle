@@ -45,11 +45,11 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public void starUp(List<Long> itemIds) {
+    public void legendarySynthesis(List<Long> itemIds) {
         List<Item> items = itemRepository.findAllById(itemIds);
         Item legendary1 = items.get(0);
         Item legendary2 = items.get(1);
-        legendary1.starUp(legendary2);
+        legendary1.legendarySynthesis(legendary2);
         itemRepository.delete(legendary2);
     }
 }
