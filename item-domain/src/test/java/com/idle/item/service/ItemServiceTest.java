@@ -41,6 +41,18 @@ class ItemServiceTest {
     }
 
     @Test
+    @DisplayName("사용자 아이템을 조회하여 등급 업")
+    void user_item_grade_up() {
+        ItemService sut = new ItemService(itemRepository, new MockRandomGenerator(999));
+        Member member = createMember(1000);
+        Item item = createItem(member, Weapon.of(SWORD, EPIC));
+
+        sut.gradeUp(item.getId());
+
+        assertThat(item.getWeapon().getGrade()).isEqualTo(UNIQUE);
+    }
+
+    @Test
     @DisplayName("4개(노말, 레어, 에픽, 유니크)무기를 찾아 검증 레전더리 무기 저장")
     void synthesis_legendary_weapon() {
         ItemService sut = new ItemService(itemRepository, new MockRandomGenerator(0));
@@ -64,18 +76,6 @@ class ItemServiceTest {
             }
         }
         itemRepository.saveAll(items);
-    }
-
-    @Test
-    @DisplayName("사용자 아이템을 조회하여 등급 업")
-    void user_item_grade_up() {
-        ItemService sut = new ItemService(itemRepository, new MockRandomGenerator(999));
-        Member member = createMember(1000);
-        Item item = createItem(member, Weapon.of(SWORD, EPIC));
-
-        sut.gradeUp(item.getId());
-
-        assertThat(item.getWeapon().getGrade()).isEqualTo(UNIQUE);
     }
 
     private Member createMember(int amount) {

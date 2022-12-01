@@ -78,7 +78,7 @@ public class Item {
 
     private void ingredientNameCheck(List<Item> items) {
         for (Item item : items) {
-            if (this.getWeapon().getName() != item.getWeapon().getName()) {
+            if (this.weapon.getName() != item.weapon.getName()) {
                 throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
             }
         }
@@ -94,9 +94,29 @@ public class Item {
 
     private void ingredientGradeCheck(List<Item> items) {
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getWeapon().getGrade() != Grade.values()[i]) {
+            if (items.get(i).weapon.getGrade() != Grade.values()[i]) {
                 throw new SynthesisFailedException("등급이 맞지 않습니다.");
             }
         }
+    }
+
+    public void starUp(Item legendary2) {
+        if (legendaryGradeCheck(legendary2)) {
+            if (sameWeaponNameCheck(legendary2)) {
+                this.star++;
+            } else {
+                throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
+            }
+        } else {
+            throw new SynthesisFailedException("레전더리 등급끼리만 합성이 가능합니다.");
+        } 
+    }
+
+    private boolean legendaryGradeCheck(Item legendary2) {
+        return this.weapon.getGrade() == LEGENDARY && legendary2.weapon.getGrade() == LEGENDARY;
+    }
+
+    private boolean sameWeaponNameCheck(Item legendary2) {
+        return this.weapon.getName() == legendary2.weapon.getName();
     }
 }

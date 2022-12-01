@@ -1,5 +1,6 @@
-package com.idle.item.domain;
+package com.idle.item.domain.test;
 
+import com.idle.item.domain.Item;
 import com.idle.item.exception.SynthesisFailedException;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.DisplayName;

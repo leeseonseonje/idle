@@ -44,4 +44,12 @@ public class ItemService {
         itemRepository.deleteAll(items);
         return itemRepository.save(item);
     }
+
+    public void starUp(List<Long> itemIds) {
+        List<Item> items = itemRepository.findAllById(itemIds);
+        Item legendary1 = items.get(0);
+        Item legendary2 = items.get(1);
+        legendary1.starUp(legendary2);
+        itemRepository.delete(legendary2);
+    }
 }
