@@ -41,4 +41,8 @@ public class Weapon {
     public void gradeUp(int random) {
         this.grade = this.grade.up(random);
     }
+
+    public void end() {
+        this.grade = END;
+    }
 }

@@ -96,6 +96,22 @@ class ItemServiceTest {
                 .isInstanceOf(NoSuchElementException.class);
     }
 
+    @Test
+    @DisplayName("엔드 등급 업그레이드")
+    public void grade_up_end() {
+        ItemService sut = new ItemService(itemRepository, null);
+        Member member = createMember(1000000);
+        Item item = createItem(member, Weapon.of(SWORD, LEGENDARY));
+        for (int i = 0; i < 10; i++) {
+            item.legendarySynthesis(createItem(member, Weapon.of(SWORD, LEGENDARY)));
+        }
+
+        sut.end(item.getId());
+
+        assertThat(item.getWeapon().getGrade()).isEqualTo(END);
+        assertThat(item.getMember().getMoney().getAmount()).isEqualTo(0);
+    }
+
     private Member createMember(int amount) {
         Member member = memberRepository.save(Member.of("email"));
         member.getMoney().plusAmount(amount);

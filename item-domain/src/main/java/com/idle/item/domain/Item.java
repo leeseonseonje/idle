@@ -5,6 +5,7 @@ import com.idle.member.Member;
 import com.idle.money.domain.Money;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
+import com.idle.weapon.exception.GradeUpFailedException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -119,5 +120,14 @@ public class Item {
 
     private boolean sameWeaponNameCheck(Item legendary2) {
         return this.weapon.getName() == legendary2.weapon.getName();
+    }
+
+    public void end(Money money) {
+        money.payment(1000000);
+        if (this.star >= 10) {
+            this.weapon.end();
+        } else {
+            throw new GradeUpFailedException("별이 부족합니다.");
+        }
     }
 }

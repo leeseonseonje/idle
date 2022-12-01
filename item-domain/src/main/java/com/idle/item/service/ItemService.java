@@ -52,4 +52,11 @@ public class ItemService {
         legendary1.legendarySynthesis(legendary2);
         itemRepository.delete(legendary2);
     }
+
+    public void end(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템입니다."));
+
+        item.end(item.getMember().getMoney());
+    }
 }
