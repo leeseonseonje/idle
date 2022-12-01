@@ -72,52 +72,31 @@ public class Item {
     }
 
     private void ingredientCheck(List<Item> items) {
-        ingredientNameCheck(items);
-        ingredientUpgradeCheck(items);
-        ingredientGradeCheck(items);
-    }
-
-    private void ingredientNameCheck(List<Item> items) {
-        for (Item item : items) {
-            if (this.weapon.getName() != item.weapon.getName()) {
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            if (this.weapon.sameWeaponNameCheck(item.weapon)) {
                 throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
             }
-        }
-    }
 
-    private void ingredientUpgradeCheck(List<Item> items) {
-        for (Item item : items) {
             if (item.getUpgrade() < 100) {
                 throw new SynthesisFailedException("업그레이드 횟수가 모자릅니다.");
             }
-        }
-    }
 
-    private void ingredientGradeCheck(List<Item> items) {
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).weapon.getGrade() != Grade.values()[i]) {
+            if (item.weapon.gradeCheck(i)) {
                 throw new SynthesisFailedException("등급이 맞지 않습니다.");
             }
         }
     }
 
     public void legendarySynthesis(Item legendary2) {
-        if (!legendaryGradeCheck(legendary2)) {
+        if (!this.weapon.legendaryGradeCheck(legendary2.weapon)) {
             throw new SynthesisFailedException("레전더리 등급끼리만 합성이 가능합니다.");
         }
-        if (!sameWeaponNameCheck(legendary2)) {
+        if (!this.weapon.sameWeaponNameCheck(legendary2.weapon)) {
             throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
         }
         this.star++;
         this.upgrade += legendary2.getUpgrade();
-    }
-
-    private boolean legendaryGradeCheck(Item legendary2) {
-        return this.weapon.getGrade() == LEGENDARY && legendary2.weapon.getGrade() == LEGENDARY;
-    }
-
-    private boolean sameWeaponNameCheck(Item legendary2) {
-        return this.weapon.getName() == legendary2.weapon.getName();
     }
 
     public void end(Money money) {
