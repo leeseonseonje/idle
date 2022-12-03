@@ -3,7 +3,6 @@ package com.idle.item.domain;
 import com.idle.member.Member;
 import com.idle.money.domain.Money;
 import com.idle.weapon.domain.Weapon;
-import com.idle.weapon.exception.GradeUpFailedException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,33 +55,34 @@ public class Item {
 
     public void upgrade(Money money) {
         money.payment(1000 + upgrade);
+
         this.upgrade++;
     }
 
     public void gradeUp(Money money, int random) {
         money.payment(1000);
+
         this.weapon = this.weapon.gradeUp(random);
     }
 
     public Item legendaryGradeUp(List<Item> items) {
-        MaterialWeaponDirector director = new MaterialWeaponDirector(this.weapon);
-        director.checkLegendaryGradeUpMaterial(items);
-        return Item.of(this.member, Weapon.of(this.weapon.getName(), LEGENDARY));
+        new MaterialInspector(this).legendaryGradeUpMaterial(items);
+
+        Weapon legendaryWeapon = Weapon.of(this.weapon.getName(), LEGENDARY);
+        return Item.of(this.member, legendaryWeapon);
     }
 
     public void starUp(Item legendary2) {
-        MaterialWeaponDirector director = new MaterialWeaponDirector(this.weapon);
-        director.checkStarUpMaterial(legendary2);
+        new MaterialInspector(this).starUpMaterial(legendary2);
+
         this.star++;
-        this.upgrade += legendary2.getUpgrade();
+        this.upgrade += legendary2.upgrade;
     }
 
     public void endGradeUp(Money money) {
         money.payment(1000000);
-        if (this.star >= 10) {
-            this.weapon = this.weapon.endGradeUp();
-        } else {
-            throw new GradeUpFailedException("별이 부족합니다.");
-        }
+        new MaterialInspector(this).endGradeUpMaterial();
+
+        this.weapon = this.weapon.endGradeUp();
     }
 }

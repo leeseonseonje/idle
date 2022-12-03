@@ -13,7 +13,7 @@ import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Name.*;
 import static org.assertj.core.api.Assertions.*;
 
-public class ItemEndTest {
+public class ItemEndGradeUpTest {
 
     @Test
     @DisplayName("레전더리 무기 10성 이상 달성 하게되면 END등급 승급 가능")

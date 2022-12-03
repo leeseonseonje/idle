@@ -19,7 +19,7 @@ public class Money {
         this.amount = 0;
     }
 
-    public void plusAmount(int amount) {
+    public void amountIncrease(int amount) {
         this.amount += amount;
     }
 

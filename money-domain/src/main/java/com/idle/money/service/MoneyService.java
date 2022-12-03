@@ -17,7 +17,7 @@ public class MoneyService {
 
         public void sprinkleMoney(List<Money> membersMoney) {
         for (Money money : membersMoney) {
-            money.plusAmount(1000);
+            money.amountIncrease(1000);
         }
     }
 }

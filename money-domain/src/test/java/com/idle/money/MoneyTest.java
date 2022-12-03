@@ -13,7 +13,7 @@ public class MoneyTest {
     void plus_1000_money_amount() {
         Money sut = new Money();
 
-        sut.plusAmount(1000);
+        sut.amountIncrease(1000);
 
         assertThat(sut.getAmount()).isEqualTo(1000);
     }
@@ -24,7 +24,7 @@ public class MoneyTest {
         Money sut = new Money();
 
         for (int i = 0; i < 10; i++) {
-            sut.plusAmount(1000);
+            sut.amountIncrease(1000);
         }
 
         assertThat(sut.getAmount()).isEqualTo(10000);

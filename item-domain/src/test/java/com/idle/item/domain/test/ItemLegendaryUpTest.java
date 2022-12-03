@@ -13,7 +13,7 @@ import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Name.*;
 import static org.assertj.core.api.Assertions.*;
 
-public class ItemSynthesisTest {
+public class ItemLegendaryUpTest {
 
     @Test
     @DisplayName("노말, 레어, 에픽, 유니크 각각 100씩 업그레이드 후 합성을 하면 레전더리 무기를 얻는다.")

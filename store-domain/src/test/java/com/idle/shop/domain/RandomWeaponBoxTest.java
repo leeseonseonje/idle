@@ -17,7 +17,7 @@ class RandomWeaponBoxTest {
     void random_weapon() {
         WeaponStore sut = new RandomWeaponBox(new MockRandomGenerator(0));
         Money money = new Money();
-        money.plusAmount(1000);
+        money.amountIncrease(1000);
 
         Weapon weapon = sut.purchase(money, 1000);
 

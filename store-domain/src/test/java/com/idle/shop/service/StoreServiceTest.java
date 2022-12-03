@@ -35,7 +35,7 @@ class StoreServiceTest {
     @DisplayName("랜덤으로 무기를 받는다.")
     void random_weapon() {
         Money money = new Money();
-        money.plusAmount(1000);
+        money.amountIncrease(1000);
         Weapon weapon = sut.weaponPurchase(money, RANDOM_WEAPON_BOX);
 
         assertThat(weapon.getName()).isEqualTo(Name.SWORD);

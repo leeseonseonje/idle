@@ -114,7 +114,7 @@ class ItemServiceTest {
 
     private Member createMember(int amount) {
         Member member = memberRepository.save(Member.of("email"));
-        member.getMoney().plusAmount(amount);
+        member.getMoney().amountIncrease(amount);
         return member;
     }
 
