@@ -67,8 +67,8 @@ public class Item {
 
     public Item legendaryGradeUp(List<Item> items) {
         new MaterialInspector(this).legendaryGradeUpMaterial(items);
-
         Weapon legendaryWeapon = Weapon.of(this.weapon.getName(), LEGENDARY);
+
         return Item.of(this.member, legendaryWeapon);
     }
 

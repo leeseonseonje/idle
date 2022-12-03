@@ -10,19 +10,19 @@ public enum Grade {
         if (r >= 990) {
             return valueOf("RARE");
         }
-        throw new GradeUpFailedException();
+        throw new GradeUpFailedException("등급업 실패!");
     }),
     RARE(r -> {
         if (r >= 995) {
             return valueOf("EPIC");
         }
-        throw new GradeUpFailedException();
+        throw new GradeUpFailedException("등급업 실패!");
     }),
     EPIC(r -> {
         if (r == 999) {
             return valueOf("UNIQUE");
         }
-        throw new GradeUpFailedException();
+        throw new GradeUpFailedException("등급업 실패!");
     }),
     UNIQUE(r -> {
         throw new IllegalStateException("등급업 할 수 없는 등급입니다.");
