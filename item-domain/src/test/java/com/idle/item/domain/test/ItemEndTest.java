@@ -21,7 +21,7 @@ public class ItemEndTest {
         Item item = createItem(Weapon.of(SWORD, LEGENDARY));
         Money money = createMoney(1000000);
         for (int i = 0; i < 10; i++) {
-            item.legendarySynthesis(createItem(Weapon.of(SWORD, LEGENDARY)));
+            item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
         }
 
         item.end(money);
@@ -36,7 +36,7 @@ public class ItemEndTest {
         Item item = createItem(Weapon.of(SWORD, LEGENDARY));
         Money money = createMoney(999999);
         for (int i = 0; i < 10; i++) {
-            item.legendarySynthesis(createItem(Weapon.of(SWORD, LEGENDARY)));
+            item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
         }
 
         assertThatThrownBy(() -> item.end(money))
@@ -49,7 +49,7 @@ public class ItemEndTest {
         Item item = createItem(Weapon.of(SWORD, LEGENDARY));
         Money money = createMoney(1000000);
         for (int i = 0; i < 9; i++) {
-            item.legendarySynthesis(createItem(Weapon.of(SWORD, LEGENDARY)));
+            item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
         }
 
         assertThatThrownBy(() -> item.end(money))

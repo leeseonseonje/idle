@@ -3,7 +3,6 @@ package com.idle.item.domain;
 import com.idle.item.exception.SynthesisFailedException;
 import com.idle.member.Member;
 import com.idle.money.domain.Money;
-import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Weapon;
 import com.idle.weapon.exception.GradeUpFailedException;
 import lombok.Builder;
@@ -63,12 +62,12 @@ public class Item {
 
     public void gradeUp(Money money, int random) {
         money.payment(1000);
-        this.weapon.gradeUp(random);
+        this.weapon = this.weapon.gradeUp(random);
     }
 
-    public Weapon synthesis(List<Item> items) {
+    public Item synthesis(List<Item> items) {
         ingredientCheck(items);
-        return Weapon.of(this.getWeapon().getName(), LEGENDARY);
+        return Item.of(this.member, Weapon.of(this.weapon.getName(), LEGENDARY));
     }
 
     private void ingredientCheck(List<Item> items) {
@@ -88,11 +87,11 @@ public class Item {
         }
     }
 
-    public void legendarySynthesis(Item legendary2) {
-        if (!this.weapon.legendaryGradeCheck(legendary2.weapon)) {
+    public void starUp(Item legendary2) {
+        if (this.weapon.legendaryGradeCheck(legendary2.weapon)) {
             throw new SynthesisFailedException("레전더리 등급끼리만 합성이 가능합니다.");
         }
-        if (!this.weapon.sameWeaponNameCheck(legendary2.weapon)) {
+        if (this.weapon.sameWeaponNameCheck(legendary2.weapon)) {
             throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
         }
         this.star++;
@@ -102,7 +101,7 @@ public class Item {
     public void end(Money money) {
         money.payment(1000000);
         if (this.star >= 10) {
-            this.weapon.end();
+            this.weapon = this.weapon.end();
         } else {
             throw new GradeUpFailedException("별이 부족합니다.");
         }

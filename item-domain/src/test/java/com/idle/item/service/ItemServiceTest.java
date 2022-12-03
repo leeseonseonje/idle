@@ -88,7 +88,7 @@ class ItemServiceTest {
         Item legendary2 = createItem(member, Weapon.of(SWORD, LEGENDARY));
         legendary2.upgrade(member.getMoney());
 
-        sut.legendarySynthesis(List.of(legendary1.getId(), legendary2.getId()));
+        sut.starUp(List.of(legendary1.getId(), legendary2.getId()));
 
         assertThat(legendary1.getStar()).isEqualTo(1);
         assertThat(legendary1.getUpgrade()).isEqualTo(1);
@@ -103,7 +103,7 @@ class ItemServiceTest {
         Member member = createMember(1000000);
         Item item = createItem(member, Weapon.of(SWORD, LEGENDARY));
         for (int i = 0; i < 10; i++) {
-            item.legendarySynthesis(createItem(member, Weapon.of(SWORD, LEGENDARY)));
+            item.starUp(createItem(member, Weapon.of(SWORD, LEGENDARY)));
         }
 
         sut.end(item.getId());

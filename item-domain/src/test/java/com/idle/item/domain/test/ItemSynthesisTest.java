@@ -29,10 +29,10 @@ public class ItemSynthesisTest {
             }
         }
 
-        Weapon weapon = sut.get(0).synthesis(sut);
+        Item item = sut.get(0).synthesis(sut);
 
-        assertThat(weapon.getName()).isEqualTo(SWORD);
-        assertThat(weapon.getGrade()).isEqualTo(LEGENDARY);
+        assertThat(item.getWeapon().getName()).isEqualTo(SWORD);
+        assertThat(item.getWeapon().getGrade()).isEqualTo(LEGENDARY);
     }
 
     @Test

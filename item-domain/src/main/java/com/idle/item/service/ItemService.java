@@ -3,7 +3,6 @@ package com.idle.item.service;
 import com.idle.item.domain.Item;
 import com.idle.item.repository.ItemRepository;
 import com.idle.random.RandomGenerator;
-import com.idle.weapon.domain.Weapon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,18 +37,19 @@ public class ItemService {
     public Item synthesis(List<Long> itemIds) {
         List<Item> items = itemRepository.findByIds(itemIds, by(ASC, "weapon.grade"));
 
-        Weapon legendaryWeapon = items.get(0).synthesis(items);
+        Item legendaryItem = items.get(0).synthesis(items);
 
-        Item item = Item.of(items.get(0).getMember(), legendaryWeapon);
         itemRepository.deleteAll(items);
-        return itemRepository.save(item);
+        return itemRepository.save(legendaryItem);
     }
 
-    public void legendarySynthesis(List<Long> itemIds) {
+    public void starUp(List<Long> itemIds) {
         List<Item> items = itemRepository.findAllById(itemIds);
         Item legendary1 = items.get(0);
         Item legendary2 = items.get(1);
-        legendary1.legendarySynthesis(legendary2);
+
+        legendary1.starUp(legendary2);
+
         itemRepository.delete(legendary2);
     }
 
