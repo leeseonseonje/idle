@@ -24,7 +24,7 @@ public class ItemEndTest {
             item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
         }
 
-        item.end(money);
+        item.endGradeUp(money);
 
         assertThat(item.getWeapon().getGrade()).isEqualTo(END);
         assertThat(money.getAmount()).isEqualTo(0);
@@ -39,7 +39,7 @@ public class ItemEndTest {
             item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
         }
 
-        assertThatThrownBy(() -> item.end(money))
+        assertThatThrownBy(() -> item.endGradeUp(money))
                 .isInstanceOf(ShortOfMoneyException.class);
     }
 
@@ -52,7 +52,7 @@ public class ItemEndTest {
             item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
         }
 
-        assertThatThrownBy(() -> item.end(money))
+        assertThatThrownBy(() -> item.endGradeUp(money))
                 .isInstanceOf(GradeUpFailedException.class);
     }
 }

@@ -37,7 +37,7 @@ public class ItemService {
     public Item synthesis(List<Long> itemIds) {
         List<Item> items = itemRepository.findByIds(itemIds, by(ASC, "weapon.grade"));
 
-        Item legendaryItem = items.get(0).synthesis(items);
+        Item legendaryItem = items.get(0).legendaryGradeUp(items);
 
         itemRepository.deleteAll(items);
         return itemRepository.save(legendaryItem);
@@ -57,6 +57,6 @@ public class ItemService {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템입니다."));
 
-        item.end(item.getMember().getMoney());
+        item.endGradeUp(item.getMember().getMoney());
     }
 }

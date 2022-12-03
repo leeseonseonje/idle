@@ -1,6 +1,5 @@
 package com.idle.item.domain;
 
-import com.idle.item.exception.SynthesisFailedException;
 import com.idle.member.Member;
 import com.idle.money.domain.Money;
 import com.idle.weapon.domain.Weapon;
@@ -65,43 +64,23 @@ public class Item {
         this.weapon = this.weapon.gradeUp(random);
     }
 
-    public Item synthesis(List<Item> items) {
-        ingredientCheck(items);
+    public Item legendaryGradeUp(List<Item> items) {
+        MaterialWeaponDirector director = new MaterialWeaponDirector(this.weapon);
+        director.checkLegendaryGradeUpMaterial(items);
         return Item.of(this.member, Weapon.of(this.weapon.getName(), LEGENDARY));
     }
 
-    private void ingredientCheck(List<Item> items) {
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
-            if (this.weapon.sameWeaponNameCheck(item.weapon)) {
-                throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
-            }
-
-            if (item.getUpgrade() < 100) {
-                throw new SynthesisFailedException("업그레이드 횟수가 모자릅니다.");
-            }
-
-            if (item.weapon.gradeCheck(i)) {
-                throw new SynthesisFailedException("등급이 맞지 않습니다.");
-            }
-        }
-    }
-
     public void starUp(Item legendary2) {
-        if (this.weapon.legendaryGradeCheck(legendary2.weapon)) {
-            throw new SynthesisFailedException("레전더리 등급끼리만 합성이 가능합니다.");
-        }
-        if (this.weapon.sameWeaponNameCheck(legendary2.weapon)) {
-            throw new SynthesisFailedException("다른 종류의 무기는 합성할 수 없습니다.");
-        }
+        MaterialWeaponDirector director = new MaterialWeaponDirector(this.weapon);
+        director.checkStarUpMaterial(legendary2);
         this.star++;
         this.upgrade += legendary2.getUpgrade();
     }
 
-    public void end(Money money) {
+    public void endGradeUp(Money money) {
         money.payment(1000000);
         if (this.star >= 10) {
-            this.weapon = this.weapon.end();
+            this.weapon = this.weapon.endGradeUp();
         } else {
             throw new GradeUpFailedException("별이 부족합니다.");
         }

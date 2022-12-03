@@ -29,7 +29,7 @@ public class ItemSynthesisTest {
             }
         }
 
-        Item item = sut.get(0).synthesis(sut);
+        Item item = sut.get(0).legendaryGradeUp(sut);
 
         assertThat(item.getWeapon().getName()).isEqualTo(SWORD);
         assertThat(item.getWeapon().getGrade()).isEqualTo(LEGENDARY);
@@ -49,7 +49,7 @@ public class ItemSynthesisTest {
             }
         }
 
-        assertThatThrownBy(() -> sut.get(0).synthesis(sut)).isInstanceOf(SynthesisFailedException.class);
+        assertThatThrownBy(() -> sut.get(0).legendaryGradeUp(sut)).isInstanceOf(SynthesisFailedException.class);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ItemSynthesisTest {
             }
         }
 
-        assertThatThrownBy(() -> sut.get(0).synthesis(sut)).isInstanceOf(SynthesisFailedException.class);
+        assertThatThrownBy(() -> sut.get(0).legendaryGradeUp(sut)).isInstanceOf(SynthesisFailedException.class);
     }
 
     @Test
@@ -83,6 +83,6 @@ public class ItemSynthesisTest {
             }
         }
 
-        assertThatThrownBy(() -> sut.get(0).synthesis(sut)).isInstanceOf(SynthesisFailedException.class);
+        assertThatThrownBy(() -> sut.get(0).legendaryGradeUp(sut)).isInstanceOf(SynthesisFailedException.class);
     }
 }

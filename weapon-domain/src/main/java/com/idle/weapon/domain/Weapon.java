@@ -42,19 +42,7 @@ public class Weapon {
         return Weapon.of(this.name, this.grade.up(random));
     }
 
-    public boolean gradeCheck(int index) {
-        return this.grade != Grade.values()[index];
-    }
-
-    public boolean sameWeaponNameCheck(Weapon weapon) {
-        return this.getName() != weapon.getName();
-    }
-
-    public boolean legendaryGradeCheck(Weapon legendary2) {
-        return this.getGrade() != LEGENDARY && legendary2.getGrade() != LEGENDARY;
-    }
-
-    public Weapon end() {
+    public Weapon endGradeUp() {
         return Weapon.of(this.name, END);
     }
 }
