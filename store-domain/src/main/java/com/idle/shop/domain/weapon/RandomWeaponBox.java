@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class RandomWeaponBox extends WeaponStore {
+public class RandomWeaponBox implements WeaponStore {
 
     private final RandomGenerator randomGenerator;
 
