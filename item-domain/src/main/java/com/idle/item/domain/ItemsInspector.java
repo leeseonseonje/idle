@@ -11,11 +11,11 @@ import java.util.List;
 import static com.idle.weapon.domain.Grade.LEGENDARY;
 
 @AllArgsConstructor
-public class MaterialInspector {
+public class ItemsInspector {
 
     private Item item;
 
-    protected void legendaryGradeUpMaterial(List<Item> items) {
+    protected void checkLegendaryGradeUp(List<Item> items) {
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             isSameName(item.getWeapon());
@@ -24,12 +24,12 @@ public class MaterialInspector {
         }
     }
 
-    protected void starUpMaterial(Item legendary2) {
+    protected void checkStarUp(Item legendary2) {
         isSameName(legendary2.getWeapon());
         isLegendaryGrade(legendary2.getWeapon());
     }
 
-    protected void endGradeUpMaterial() {
+    protected void checkEndGradeUp() {
         if (this.item.getStar() < 10) {
             throw new GradeUpFailedException("별이 부족합니다.");
         }

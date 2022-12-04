@@ -66,14 +66,14 @@ public class Item {
     }
 
     public Item legendaryGradeUp(List<Item> items) {
-        new MaterialInspector(this).legendaryGradeUpMaterial(items);
+        new ItemsInspector(this).checkLegendaryGradeUp(items);
         Weapon legendaryWeapon = Weapon.of(this.weapon.getName(), LEGENDARY);
 
         return Item.of(this.member, legendaryWeapon);
     }
 
     public void starUp(Item legendary2) {
-        new MaterialInspector(this).starUpMaterial(legendary2);
+        new ItemsInspector(this).checkStarUp(legendary2);
 
         this.star++;
         this.upgrade += legendary2.upgrade;
@@ -81,7 +81,7 @@ public class Item {
 
     public void endGradeUp(Money money) {
         money.payment(1000000);
-        new MaterialInspector(this).endGradeUpMaterial();
+        new ItemsInspector(this).checkEndGradeUp();
 
         this.weapon = this.weapon.endGradeUp();
     }
