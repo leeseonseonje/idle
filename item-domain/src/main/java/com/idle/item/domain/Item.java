@@ -38,7 +38,7 @@ public class Item {
     private boolean isWear;
 
     @Builder
-    private Item(Member member, Weapon weapon) {
+    private Item(Member member, Weapon weapon, int upgrade, int star, boolean isWear) {
         this.member = member;
         this.weapon = weapon;
         this.upgrade = 0;
@@ -46,10 +46,13 @@ public class Item {
         this.isWear = false;
     }
 
-    public static Item of(Member member, Weapon weapon) {
+    public static Item of(Member member, Weapon weapon, int upgrade, int star, boolean isWear) {
         return Item.builder()
                 .member(member)
                 .weapon(weapon)
+                .upgrade(upgrade)
+                .star(star)
+                .isWear(isWear)
                 .build();
     }
 
@@ -69,7 +72,7 @@ public class Item {
         new ItemsInspector(this).checkLegendaryGradeUp(items);
         Weapon legendaryWeapon = Weapon.of(this.weapon.getName(), LEGENDARY);
 
-        return Item.of(this.member, legendaryWeapon);
+        return Item.of(this.member, legendaryWeapon, 0, 0, false);
     }
 
     public void starUp(Item legendary2) {

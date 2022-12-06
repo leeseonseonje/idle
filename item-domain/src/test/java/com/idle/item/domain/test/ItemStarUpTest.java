@@ -18,12 +18,8 @@ public class ItemStarUpTest {
     @DisplayName("같은 종류의 레전더리 등급 무기를 2개 합성하면 별 증가 업그레이드는 합쳐짐")
     void legendary_plus_legendary_star_up() {
         Money money = createMoney(10000000);
-        Item legendary1 = createItem(Weapon.of(SWORD, LEGENDARY));
-        Item legendary2 = createItem(Weapon.of(SWORD, LEGENDARY));
-        for (int i = 0; i < 100; i++) {
-            legendary1.upgrade(money);
-            legendary2.upgrade(money);
-        }
+        Item legendary1 = createItem(Weapon.of(SWORD, LEGENDARY), 100, 0, false);
+        Item legendary2 = createItem(Weapon.of(SWORD, LEGENDARY), 100, 0, false);
 
         legendary1.starUp(legendary2);
 
@@ -34,8 +30,8 @@ public class ItemStarUpTest {
     @Test
     @DisplayName("등급이 다르면 예외 발생")
     void other_grade_fail() {
-        Item legendary = createItem(Weapon.of(SWORD, LEGENDARY));
-        Item unique = createItem(Weapon.of(SWORD, UNIQUE));
+        Item legendary = createItem(Weapon.of(SWORD, LEGENDARY), 0, 0, false);
+        Item unique = createItem(Weapon.of(SWORD, UNIQUE), 0, 0, false);
 
         assertThatThrownBy(() -> legendary.starUp(unique))
                 .isInstanceOf(SynthesisFailedException.class);
@@ -44,8 +40,8 @@ public class ItemStarUpTest {
     @Test
     @DisplayName("무기가 다르면 예외 발생")
     void other_name_fail() {
-        Item legendary1 = createItem(Weapon.of(SWORD, LEGENDARY));
-        Item legendary2 = createItem(Weapon.of(AXE, LEGENDARY));
+        Item legendary1 = createItem(Weapon.of(SWORD, LEGENDARY), 0, 0, false);
+        Item legendary2 = createItem(Weapon.of(AXE, LEGENDARY), 0, 0, false);
 
         assertThatThrownBy(() -> legendary1.starUp(legendary2))
                 .isInstanceOf(SynthesisFailedException.class);

@@ -1,9 +1,11 @@
 package com.idle.money.domain;
 
 import com.idle.money.exception.ShortOfMoneyException;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -15,8 +17,19 @@ public class Money {
 
     private int amount;
 
-    public Money() {
-        this.amount = 0;
+    private LocalDateTime lastCollectMoneyTime;
+
+    @Builder
+    private Money(int amount, LocalDateTime lastCollectMoneyTime) {
+        this.amount = amount;
+        this.lastCollectMoneyTime = lastCollectMoneyTime;
+    }
+
+    public static Money of(int amount, LocalDateTime lastCollectMoneyTime) {
+        return Money.builder()
+                .amount(amount)
+                .lastCollectMoneyTime(lastCollectMoneyTime)
+                .build();
     }
 
     public void amountIncrease(int amount) {
@@ -32,5 +45,9 @@ public class Money {
         if (this.amount < price) {
             throw new ShortOfMoneyException("돈이 부족합니다.");
         }
+    }
+
+    public void lastCollectMoneyTimeUpdate(LocalDateTime lastCollectMoneyTime) {
+        this.lastCollectMoneyTime = lastCollectMoneyTime;
     }
 }

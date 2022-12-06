@@ -13,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDateTime;
+
 import static com.idle.shop.domain.weapon.Product.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -34,8 +36,7 @@ class StoreServiceTest {
     @Test
     @DisplayName("랜덤으로 무기를 받는다.")
     void random_weapon() {
-        Money money = new Money();
-        money.amountIncrease(1000);
+        Money money = Money.of(1000, LocalDateTime.now());
 
         Weapon weapon = sut.weaponPurchase(money, RANDOM_WEAPON_BOX);
 

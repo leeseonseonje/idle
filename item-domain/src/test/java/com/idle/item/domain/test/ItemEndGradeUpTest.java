@@ -18,11 +18,8 @@ public class ItemEndGradeUpTest {
     @Test
     @DisplayName("레전더리 무기 10성 이상 달성 하게되면 END등급 승급 가능")
     void legendary_start_ten_end() {
-        Item item = createItem(Weapon.of(SWORD, LEGENDARY));
+        Item item = createItem(Weapon.of(SWORD, LEGENDARY), 0, 10, false);
         Money money = createMoney(1000000);
-        for (int i = 0; i < 10; i++) {
-            item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
-        }
 
         item.endGradeUp(money);
 
@@ -33,11 +30,8 @@ public class ItemEndGradeUpTest {
     @Test
     @DisplayName("돈이 100만원이 필요하다.")
     void one_hundred_needed() {
-        Item item = createItem(Weapon.of(SWORD, LEGENDARY));
+        Item item = createItem(Weapon.of(SWORD, LEGENDARY), 0, 10, false);
         Money money = createMoney(999999);
-        for (int i = 0; i < 10; i++) {
-            item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
-        }
 
         assertThatThrownBy(() -> item.endGradeUp(money))
                 .isInstanceOf(ShortOfMoneyException.class);
@@ -46,11 +40,8 @@ public class ItemEndGradeUpTest {
     @Test
     @DisplayName("별이 10개 이상이어야 한다.")
     void ten_stars_required() {
-        Item item = createItem(Weapon.of(SWORD, LEGENDARY));
+        Item item = createItem(Weapon.of(SWORD, LEGENDARY), 0, 9, false);
         Money money = createMoney(1000000);
-        for (int i = 0; i < 9; i++) {
-            item.starUp(createItem(Weapon.of(SWORD, LEGENDARY)));
-        }
 
         assertThatThrownBy(() -> item.endGradeUp(money))
                 .isInstanceOf(GradeUpFailedException.class);

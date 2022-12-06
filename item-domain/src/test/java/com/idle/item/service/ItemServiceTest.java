@@ -66,16 +66,11 @@ class ItemServiceTest {
     }
 
     private void upgradeWeaponInit(Member member) {
-        Item normal = Item.of(member, Weapon.of(SWORD, NORMAL));
-        Item rare = Item.of(member, Weapon.of(SWORD, RARE));
-        Item epic = Item.of(member, Weapon.of(SWORD, EPIC));
-        Item unique = Item.of(member, Weapon.of(SWORD, UNIQUE));
+        Item normal = Item.of(member, Weapon.of(SWORD, NORMAL), 100, 0, false);
+        Item rare = Item.of(member, Weapon.of(SWORD, RARE), 100, 0, false);
+        Item epic = Item.of(member, Weapon.of(SWORD, EPIC), 100, 0, false);
+        Item unique = Item.of(member, Weapon.of(SWORD, UNIQUE), 100, 0, false);
         List<Item> items = List.of(normal, rare, epic, unique);
-        for (Item item : items) {
-            for (int i = 0; i < 100; i++) {
-                item.upgrade(member.getMoney());
-            }
-        }
         itemRepository.saveAll(items);
     }
 
@@ -119,7 +114,7 @@ class ItemServiceTest {
     }
 
     private Item createItem(Member member, Weapon weapon) {
-        Item item = Item.of(member, weapon);
+        Item item = Item.of(member, weapon, 0, 0, false);
         return itemRepository.save(item);
     }
 }

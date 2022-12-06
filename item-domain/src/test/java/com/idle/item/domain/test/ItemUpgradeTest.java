@@ -17,7 +17,7 @@ class ItemUpgradeTest {
     @Test
     @DisplayName("아이템을 업그레이드 하면 돈이 차감되고, 무기가 1씩 업그레이드 된다.")
     void item_upgrade_plus() {
-        Item sut = ItemFactory.createItem(Weapon.of(SWORD, NORMAL));
+        Item sut = ItemFactory.createItem(Weapon.of(SWORD, NORMAL), 0, 0, false);
         Money money = ItemFactory.createMoney(100000);
         sut.upgrade(money);
 
@@ -28,7 +28,7 @@ class ItemUpgradeTest {
     @Test
     @DisplayName("아이템의 업그레이드 횟수만큼 업그레이드에 드는 비용이 증가한다.")
     void item_upgrade_plus_overlap() {
-        Item sut = ItemFactory.createItem(Weapon.of(SWORD, NORMAL));
+        Item sut = ItemFactory.createItem(Weapon.of(SWORD, NORMAL), 0, 0, false);
         Money money = ItemFactory.createMoney(100000);
         for (int i = 0; i < 10; i++) {
             sut.upgrade(money);
@@ -41,7 +41,7 @@ class ItemUpgradeTest {
     @Test
     @DisplayName("돈이 부족하면 ShortOfMoneyException 발생")
     void item_upgrade_short_of_money() {
-        Item sut = ItemFactory.createItem(Weapon.of(SWORD, NORMAL));
+        Item sut = ItemFactory.createItem(Weapon.of(SWORD, NORMAL), 0, 0, false);
         Money money = ItemFactory.createMoney(100);
         assertThatThrownBy(() -> sut.upgrade(money)).isInstanceOf(ShortOfMoneyException.class);
     }

@@ -1,23 +1,28 @@
 package com.idle.money.service;
 
 import com.idle.money.domain.Money;
-import com.idle.money.repository.MoneyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class MoneyService {
 
-    private final MoneyRepository moneyRepository;
+    public void putMoney(Money money, LocalDateTime now) {
+        LocalDateTime lastCollectMoneyTime = money.getLastCollectMoneyTime();
 
-        public void sprinkleMoney(List<Money> membersMoney) {
-        for (Money money : membersMoney) {
-            money.amountIncrease(1000);
-        }
+        long betweenSeconds = ChronoUnit.SECONDS.between(lastCollectMoneyTime, now);
+        long betweenMinute = betweenSeconds / 60;
+        long remainingSeconds = betweenSeconds % 60;
+
+        money.amountIncrease((int) (betweenMinute * 1000));
+
+        LocalDateTime newLastCollectMoneyTime = now.minusSeconds(remainingSeconds);
+        money.lastCollectMoneyTimeUpdate(newLastCollectMoneyTime);
     }
 }

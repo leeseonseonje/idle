@@ -7,6 +7,8 @@ import com.idle.shop.domain.weapon.WeaponStore;
 import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Name.*;
 import static org.assertj.core.api.Assertions.*;
@@ -16,8 +18,7 @@ class RandomWeaponBoxTest {
     @Test
     void random_weapon() {
         WeaponStore sut = new RandomWeaponBox(new MockRandomGenerator(0));
-        Money money = new Money();
-        money.amountIncrease(1000);
+        Money money = Money.of(1000, LocalDateTime.now());
 
         Weapon weapon = sut.purchase(money, 1000);
 

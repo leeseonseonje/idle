@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
+
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
@@ -28,7 +30,7 @@ public class Member {
 
     @Builder
     private Member(String email) {
-        this.money = new Money();
+        this.money = Money.of(0, LocalDateTime.now());
         this.email = email;
     }
 

@@ -32,10 +32,10 @@ class ItemRepositoryTest {
         Member member = Member.of("email");
         memberRepository.save(member);
 
-        Item normal = Item.of(member, Weapon.of(SWORD, NORMAL));
-        Item rare = Item.of(member, Weapon.of(SWORD, RARE));
-        Item epic = Item.of(member, Weapon.of(SWORD, EPIC));
-        Item unique = Item.of(member, Weapon.of(SWORD, UNIQUE));
+        Item normal = Item.of(member, Weapon.of(SWORD, NORMAL), 0, 0, false);
+        Item rare = Item.of(member, Weapon.of(SWORD, RARE), 0, 0, false);
+        Item epic = Item.of(member, Weapon.of(SWORD, EPIC), 0, 0, false);
+        Item unique = Item.of(member, Weapon.of(SWORD, UNIQUE), 0, 0, false);
 
         itemRepository.save(unique);
         itemRepository.save(rare);

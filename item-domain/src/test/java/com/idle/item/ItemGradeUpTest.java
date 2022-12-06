@@ -14,7 +14,7 @@ public class ItemGradeUpTest {
 
     @Test
     void normal_to_rare() {
-        Item item = createItem(Weapon.of(SWORD, NORMAL));
+        Item item = createItem(Weapon.of(SWORD, NORMAL), 0, 0, false);
         Money money = createMoney(1000);
         item.gradeUp(money, 990);
 
@@ -23,7 +23,7 @@ public class ItemGradeUpTest {
 
     @Test
     void rare_to_epic() {
-        Item item = createItem(Weapon.of(SWORD, RARE));
+        Item item = createItem(Weapon.of(SWORD, RARE), 0, 0, false);
         Money money = createMoney(1000);
         item.gradeUp(money, 995);
 
@@ -32,7 +32,7 @@ public class ItemGradeUpTest {
 
     @Test
     void epic_to_unique() {
-        Item item = createItem(Weapon.of(SWORD, EPIC));
+        Item item = createItem(Weapon.of(SWORD, EPIC), 0, 0, false);
         Money money = createMoney(1000);
         item.gradeUp(money, 999);
 

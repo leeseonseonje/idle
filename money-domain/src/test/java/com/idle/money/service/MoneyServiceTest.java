@@ -7,40 +7,37 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DataJpaTest
 class MoneyServiceTest {
-
-    @Autowired
-    MoneyRepository moneyRepository;
 
     MoneyService sut;
 
     @Test
-    @DisplayName("리스트 안에 있는 money를 1000씩 증가 시킨 후 update한다.")
-    void plus_amount_db_update() {
-        sut = new MoneyService(moneyRepository);
-        List<Money> membersMoney = createMembersMoney();
+    @DisplayName("마지막 수금 시간과 현재 시간을 기준으로 1분당 1000원씩 증가")
+    void last_collect_money_time_now_time_between_increase() {
+        Money money = Money.of(0, LocalDateTime.of(2020, 12, 1, 10, 0, 30));
+        sut = new MoneyService();
 
-        sut.sprinkleMoney(membersMoney);
-
-        List<Money> result = moneyRepository.findAll();
-        assertThat(result)
-                .extracting("amount")
-                .containsExactly(1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000);
+        sut.putMoney(money, LocalDateTime.of(2020, 12, 1, 11, 0, 50));
+        assertThat(money.getAmount()).isEqualTo(60000);
+        assertThat(money.getLastCollectMoneyTime()).isEqualTo("2020-12-01T11:00:30");
     }
 
-    private List<Money> createMembersMoney() {
-        List<Money> membersMoney = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Money money = new Money();
-            moneyRepository.save(money);
-            membersMoney.add(money);
-        }
-        return membersMoney;
+    @Test
+    @DisplayName("남는 초 계산")
+    void remaining_seconds() {
+        Money money = Money.of(0, LocalDateTime.of(2020, 12, 1, 10, 0, 30));
+        sut = new MoneyService();
+        sut.putMoney(money, LocalDateTime.of(2020, 12, 1, 10, 0, 50));
+
+        sut.putMoney(money, LocalDateTime.of(2020, 12, 1, 10, 1, 30));
+
+        assertThat(money.getAmount()).isEqualTo(1000);
+        assertThat(money.getLastCollectMoneyTime()).isEqualTo("2020-12-01T10:01:30");
     }
 }
