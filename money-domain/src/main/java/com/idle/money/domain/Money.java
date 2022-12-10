@@ -7,6 +7,8 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static java.time.temporal.ChronoUnit.*;
+
 @Entity
 @Getter
 public class Money {
@@ -47,7 +49,13 @@ public class Money {
         }
     }
 
-    public void lastCollectMoneyTimeUpdate(LocalDateTime lastCollectMoneyTime) {
-        this.lastCollectMoneyTime = lastCollectMoneyTime;
+    public void perMinutePutMoney(LocalDateTime now) {
+        long betweenSeconds = SECONDS.between(this.lastCollectMoneyTime, now);
+        long betweenMinute = betweenSeconds / 60;
+        long remainingSeconds = betweenSeconds % 60;
+
+        this.amountIncrease((int) (betweenMinute * 1000));
+
+        this.lastCollectMoneyTime = now.minusSeconds(remainingSeconds);
     }
 }
