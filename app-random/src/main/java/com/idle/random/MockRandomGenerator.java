@@ -3,9 +3,7 @@ package com.idle.random;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class MockRandomGenerator implements RandomGenerator {
-
-    private final int result;
+public record MockRandomGenerator(int result) implements RandomGenerator {
 
     @Override
     public int generate(int bound) {
