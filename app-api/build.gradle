@@ -1,0 +1,9 @@
+task prepareKotlinBuildScriptModel {}
+
+dependencies {
+    implementation project(":member-domain")
+    implementation project(":money-domain")
+    implementation project(":item-domain")
+    implementation project(":store-domain")
+    implementation project(":weapon-domain")
+}

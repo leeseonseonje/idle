@@ -1,6 +1,7 @@
 package com.idle.money;
 
 import com.idle.money.domain.Money;
+import com.idle.money.service.MoneyService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,19 +36,25 @@ public class MoneyTest {
     }
 
     @Test
-    void test() {
-        LocalDateTime of = LocalDateTime.of(2022, 12, 6, 10, 20, 0);
-        LocalDateTime of1 = LocalDateTime.of(2022, 12, 6, 10, 50, 45);
-        long between = ChronoUnit.SECONDS.between(of, of1);
-        System.out.println(between);
-        System.out.println(between / 60);
-        System.out.println(between % 60);
-        LocalDateTime localDateTime = of1.minusSeconds(between);
-        System.out.println(localDateTime);
+    @DisplayName("마지막 수금 시간과 현재 시간을 기준으로 1분당 1000원씩 증가")
+    void last_collect_money_time_now_time_between_increase() {
+        Money sut = Money.of(0, LocalDateTime.of(2020, 12, 1, 10, 0, 30));
 
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(now);
-        LocalDateTime localDateTime1 = now.minusSeconds(60);
-        System.out.println(localDateTime1);
+        sut.perMinutePutMoney(LocalDateTime.of(2020, 12, 1, 11, 0, 50));
+        assertThat(sut.getAmount()).isEqualTo(60000);
+        assertThat(sut.getLastCollectMoneyTime()).isEqualTo("2020-12-01T11:00:30");
+    }
+
+    @Test
+    @DisplayName("남는 초 계산")
+    void remaining_seconds() {
+        Money sut = Money.of(0, LocalDateTime.of(2020, 12, 1, 10, 0, 30));
+
+        sut.perMinutePutMoney(LocalDateTime.of(2020, 12, 1, 10, 0, 50));
+
+        sut.perMinutePutMoney(LocalDateTime.of(2020, 12, 1, 10, 1, 30));
+
+        assertThat(sut.getAmount()).isEqualTo(1000);
+        assertThat(sut.getLastCollectMoneyTime()).isEqualTo("2020-12-01T10:01:30");
     }
 }

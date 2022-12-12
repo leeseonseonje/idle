@@ -22,17 +22,4 @@ class MoneyServiceTest {
         assertThat(money.getAmount()).isEqualTo(60000);
         assertThat(money.getLastCollectMoneyTime()).isEqualTo("2020-12-01T11:00:30");
     }
-
-    @Test
-    @DisplayName("남는 초 계산")
-    void remaining_seconds() {
-        Money money = Money.of(0, LocalDateTime.of(2020, 12, 1, 10, 0, 30));
-        sut = new MoneyService();
-        sut.perMinutePutMoney(money, LocalDateTime.of(2020, 12, 1, 10, 0, 50));
-
-        sut.perMinutePutMoney(money, LocalDateTime.of(2020, 12, 1, 10, 1, 30));
-
-        assertThat(money.getAmount()).isEqualTo(1000);
-        assertThat(money.getLastCollectMoneyTime()).isEqualTo("2020-12-01T10:01:30");
-    }
 }

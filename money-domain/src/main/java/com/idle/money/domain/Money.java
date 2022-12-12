@@ -54,6 +54,7 @@ public class Money {
         long betweenMinute = betweenSeconds / 60;
         long remainingSeconds = betweenSeconds % 60;
 
+
         this.amountIncrease((int) (betweenMinute * 1000));
 
         this.lastCollectMoneyTime = now.minusSeconds(remainingSeconds);
