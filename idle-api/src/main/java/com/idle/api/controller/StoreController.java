@@ -2,6 +2,7 @@ package com.idle.api.controller;
 
 import com.idle.api.controller.dto.StorePurchaseDto;
 import com.idle.api.service.StoreApiService;
+import com.idle.api.service.dto.StoreItemDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ public class StoreController {
     private final StoreApiService storeApiService;
 
     @PostMapping("/store/weapon")
-    public void weaponPurchase(@RequestBody StorePurchaseDto request) {
-        storeApiService.weaponPurchase(request);
+    public StoreItemDto weaponPurchase(@RequestBody StorePurchaseDto request) {
+        return storeApiService.weaponPurchase(request);
     }
 }

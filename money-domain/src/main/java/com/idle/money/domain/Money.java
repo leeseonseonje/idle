@@ -49,14 +49,16 @@ public class Money {
         }
     }
 
-    public void perMinutePutMoney(LocalDateTime now) {
+    public int perMinutePutMoney(LocalDateTime now) {
         long betweenSeconds = SECONDS.between(this.lastCollectMoneyTime, now);
         long betweenMinute = betweenSeconds / 60;
         long remainingSeconds = betweenSeconds % 60;
 
-
-        this.amountIncrease((int) (betweenMinute * 1000));
+        int depositedAmount = (int) betweenMinute * 1000;
+        this.amountIncrease(depositedAmount);
 
         this.lastCollectMoneyTime = now.minusSeconds(remainingSeconds);
+
+        return depositedAmount;
     }
 }

@@ -18,8 +18,9 @@ class MoneyServiceTest {
         Money money = Money.of(0, LocalDateTime.of(2020, 12, 1, 10, 0, 30));
         sut = new MoneyService();
 
-        sut.perMinutePutMoney(money, LocalDateTime.of(2020, 12, 1, 11, 0, 50));
-        assertThat(money.getAmount()).isEqualTo(60000);
+        int result = sut.perMinutePutMoney(money,
+                LocalDateTime.of(2020, 12, 1, 11, 0, 50));
+        assertThat(result).isEqualTo(60000);
         assertThat(money.getLastCollectMoneyTime()).isEqualTo("2020-12-01T11:00:30");
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MoneyService {
 
-    public void perMinutePutMoney(Money money, LocalDateTime now) {
-        money.perMinutePutMoney(now);
+    public int perMinutePutMoney(Money money, LocalDateTime now) {
+        return money.perMinutePutMoney(now);
     }
 }
