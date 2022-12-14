@@ -2,6 +2,8 @@ package com.idle.item.service;
 
 import com.idle.item.domain.Item;
 import com.idle.item.repository.ItemRepository;
+import com.idle.item.service.dto.GradeUpDto;
+import com.idle.item.service.dto.ResponseItemDto;
 import com.idle.member.Member;
 import com.idle.member.repository.MemberRepository;
 import com.idle.random.MockRandomGenerator;
@@ -13,10 +15,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Grade.UNIQUE;
 import static com.idle.weapon.domain.Name.SWORD;
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
@@ -35,9 +39,9 @@ class ItemServiceTest {
         Member member = createMember(1000);
         Item item = createItem(member, Weapon.of(SWORD, NORMAL));
 
-        sut.upgrade(item.getId());
+        ResponseItemDto result = sut.upgrade(item.getId());
 
-        assertThat(item.getUpgrade()).isEqualTo(1);
+        assertThat(result.upgrade()).isEqualTo(1);
         assertThat(item.getMember().getMoney().getAmount()).isEqualTo(0);
     }
 
@@ -48,9 +52,9 @@ class ItemServiceTest {
         Member member = createMember(1000);
         Item item = createItem(member, Weapon.of(SWORD, EPIC));
 
-        sut.gradeUp(item.getId());
+        GradeUpDto result = sut.gradeUp(item.getId());
 
-        assertThat(item.getWeapon().getGrade()).isEqualTo(UNIQUE);
+        assertThat(result.weapon().getGrade()).isEqualTo(UNIQUE);
     }
 
     @Test
@@ -58,20 +62,20 @@ class ItemServiceTest {
     void synthesis_legendary_weapon() {
         ItemService sut = new ItemService(itemRepository, new MockRandomGenerator(0));
         Member member = createMember(1000000);
-        upgradeWeaponInit(member);
+        List<Long> ids = upgradeWeaponInit(member);
 
-        Item item = sut.synthesis(List.of(3L, 4L, 5L, 6L));
+        ResponseItemDto result = sut.synthesis(ids);
 
-        assertThat(item.getWeapon().getGrade()).isEqualTo(LEGENDARY);
+        assertThat(result.weapon().getGrade()).isEqualTo(LEGENDARY);
     }
 
-    private void upgradeWeaponInit(Member member) {
+    private List<Long> upgradeWeaponInit(Member member) {
         Item normal = Item.of(member, Weapon.of(SWORD, NORMAL), 100, 0, false);
         Item rare = Item.of(member, Weapon.of(SWORD, RARE), 100, 0, false);
         Item epic = Item.of(member, Weapon.of(SWORD, EPIC), 100, 0, false);
         Item unique = Item.of(member, Weapon.of(SWORD, UNIQUE), 100, 0, false);
-        List<Item> items = List.of(normal, rare, epic, unique);
-        itemRepository.saveAll(items);
+        List<Item> items = itemRepository.saveAll(List.of(normal, rare, epic, unique));
+        return items.stream().map(Item::getId).collect(toList());
     }
 
     @Test
@@ -83,10 +87,10 @@ class ItemServiceTest {
         Item legendary2 = createItem(member, Weapon.of(SWORD, LEGENDARY));
         legendary2.upgrade(member.getMoney());
 
-        sut.starUp(List.of(legendary1.getId(), legendary2.getId()));
+        ResponseItemDto result = sut.starUp(List.of(legendary1.getId(), legendary2.getId()));
 
-        assertThat(legendary1.getStar()).isEqualTo(1);
-        assertThat(legendary1.getUpgrade()).isEqualTo(1);
+        assertThat(result.star()).isEqualTo(1);
+        assertThat(result.upgrade()).isEqualTo(1);
         assertThatThrownBy(() -> itemRepository.findById(legendary2.getId()).get())
                 .isInstanceOf(NoSuchElementException.class);
     }
@@ -101,9 +105,9 @@ class ItemServiceTest {
             item.starUp(createItem(member, Weapon.of(SWORD, LEGENDARY)));
         }
 
-        sut.end(item.getId());
+        ResponseItemDto result = sut.end(item.getId());
 
-        assertThat(item.getWeapon().getGrade()).isEqualTo(END);
+        assertThat(result.weapon().getGrade()).isEqualTo(END);
         assertThat(item.getMember().getMoney().getAmount()).isEqualTo(0);
     }
 

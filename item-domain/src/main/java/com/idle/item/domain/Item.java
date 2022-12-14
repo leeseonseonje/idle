@@ -41,8 +41,8 @@ public class Item {
     private Item(Member member, Weapon weapon, int upgrade, int star, boolean isWear) {
         this.member = member;
         this.weapon = weapon;
-        this.upgrade = 0;
-        this.star = 0;
+        this.upgrade = upgrade;
+        this.star = star;
         this.isWear = false;
     }
 
