@@ -1,8 +1,8 @@
-package com.idle.api.controller.dto;
+package com.idle.api.controller.dto.request;
 
 import com.idle.shop.domain.weapon.Product;
 
-public record StorePurchaseDto(
+public record RequestStorePurchaseDto(
         Long memberId,
         Product product
 ) {

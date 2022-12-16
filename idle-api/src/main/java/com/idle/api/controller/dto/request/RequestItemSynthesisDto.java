@@ -1,8 +1,8 @@
-package com.idle.api.controller.dto;
+package com.idle.api.controller.dto.request;
 
 import java.util.List;
 
-public record ItemSynthesisDto(
+public record RequestItemSynthesisDto(
         Long normalId,
         Long rareId,
         Long epicId,

@@ -1,6 +1,6 @@
 package com.idle.api.controller;
 
-import com.idle.api.controller.dto.StorePurchaseDto;
+import com.idle.api.controller.dto.request.RequestStorePurchaseDto;
 import com.idle.api.service.StoreApiService;
 import com.idle.api.service.dto.StoreItemDto;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class StoreController {
     private final StoreApiService storeApiService;
 
     @PostMapping("/store/weapon")
-    public StoreItemDto weaponPurchase(@RequestBody StorePurchaseDto request) {
+    public StoreItemDto weaponPurchase(@RequestBody RequestStorePurchaseDto request) {
         return storeApiService.weaponPurchase(request);
     }
 }

@@ -1,6 +1,6 @@
 package com.idle.api.service;
 
-import com.idle.api.controller.dto.StorePurchaseDto;
+import com.idle.api.controller.dto.request.RequestStorePurchaseDto;
 import com.idle.api.service.dto.StoreItemDto;
 import com.idle.member.Member;
 import com.idle.member.repository.MemberRepository;
@@ -28,7 +28,7 @@ class StoreApiServiceTest {
         member.getMoney().amountIncrease(99999);
         memberRepository.save(member);
 
-        StoreItemDto result = sut.weaponPurchase(new StorePurchaseDto(1L, Product.RANDOM_WEAPON_BOX));
+        StoreItemDto result = sut.weaponPurchase(new RequestStorePurchaseDto(1L, Product.RANDOM_WEAPON_BOX));
 
         System.out.println(result.weapon().getName());
         System.out.println(result.weapon().getGrade());

@@ -1,6 +1,6 @@
 package com.idle.api.service;
 
-import com.idle.api.controller.dto.StorePurchaseDto;
+import com.idle.api.controller.dto.request.RequestStorePurchaseDto;
 import com.idle.api.service.dto.StoreItemDto;
 import com.idle.item.domain.Item;
 import com.idle.item.repository.ItemRepository;
@@ -21,7 +21,7 @@ public class StoreApiService {
     private final ItemRepository itemRepository;
     private final StoreService storeService;
 
-    public StoreItemDto weaponPurchase(StorePurchaseDto request) {
+    public StoreItemDto weaponPurchase(RequestStorePurchaseDto request) {
         Member member = memberRepository.findById(request.memberId())
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
 

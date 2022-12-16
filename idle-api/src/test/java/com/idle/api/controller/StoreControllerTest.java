@@ -1,7 +1,7 @@
 package com.idle.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.idle.api.controller.dto.StorePurchaseDto;
+import com.idle.api.controller.dto.request.RequestStorePurchaseDto;
 import com.idle.api.service.StoreApiService;
 import com.idle.api.service.dto.StoreItemDto;
 import com.idle.shop.domain.weapon.Product;
@@ -35,7 +35,7 @@ class StoreControllerTest {
 
     @Test
     void weapon_purchase_response() throws Exception {
-        StorePurchaseDto request = new StorePurchaseDto(1L, Product.RANDOM_WEAPON_BOX);
+        RequestStorePurchaseDto request = new RequestStorePurchaseDto(1L, Product.RANDOM_WEAPON_BOX);
         String requestBody = objectMapper.writeValueAsString(request);
         StoreItemDto response = new StoreItemDto(2L, Weapon.of(Name.SWORD, Grade.NORMAL));
         String responseBody = objectMapper.writeValueAsString(response);

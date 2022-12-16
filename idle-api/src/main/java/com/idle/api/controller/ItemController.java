@@ -1,6 +1,6 @@
 package com.idle.api.controller;
 
-import com.idle.api.controller.dto.ItemSynthesisDto;
+import com.idle.api.controller.dto.request.RequestItemSynthesisDto;
 import com.idle.item.service.ItemService;
 import com.idle.item.service.dto.GradeUpDto;
 import com.idle.item.service.dto.ResponseItemDto;
@@ -26,7 +26,7 @@ public class ItemController {
     }
 
     @PostMapping("/item/synthesis")
-    public ResponseItemDto synthesis(@RequestBody ItemSynthesisDto request) {
+    public ResponseItemDto synthesis(@RequestBody RequestItemSynthesisDto request) {
         return itemService.synthesis(request.toList());
     }
 
