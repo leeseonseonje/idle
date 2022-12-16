@@ -1,6 +1,5 @@
 package com.idle.api.controller;
 
-import com.idle.api.controller.dto.response.ResponseMoneyDto;
 import com.idle.member.Member;
 import com.idle.member.repository.MemberRepository;
 import com.idle.money.service.MoneyService;
@@ -22,13 +21,5 @@ public class MoneyController {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
 
         return moneyService.perMinutePutMoney(member.getMoney(), LocalDateTime.now());
-    }
-
-    @GetMapping("/money/{memberId}")
-    public ResponseMoneyDto viewMoney(@PathVariable Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
-
-        return ResponseMoneyDto.toDto(member.getMoney());
     }
 }

@@ -16,6 +16,6 @@ public class StoreController {
 
     @PostMapping("/store/weapon")
     public StoreItemDto weaponPurchase(@RequestBody RequestStorePurchaseDto request) {
-        return storeApiService.weaponPurchase(request);
+        return storeApiService.weaponPurchase(request.memberId(), request.product());
     }
 }

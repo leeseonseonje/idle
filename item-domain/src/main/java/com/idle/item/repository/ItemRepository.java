@@ -12,4 +12,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("select i from Item i where i.id in :ids")
     List<Item> findByIds(@Param("ids") List<Long> ids, Sort sort);
+
+    @Query("select i from Item i where i.member.id = :memberId")
+    List<Item> findByMemberId(@Param("memberId") Long memberId, Sort sort);
+
+    @Query("select i from Item i where i.member.id = :memberId and i.wear = true")
+    List<Item> findByWearingItems(@Param("memberId") Long memberId);
 }

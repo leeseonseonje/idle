@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.idle.weapon.domain.Grade.*;
@@ -27,6 +28,8 @@ class ItemRepositoryTest {
     @Autowired
     MemberRepository memberRepository;
 
+    List<Long> ids;
+
     @BeforeEach
     void init() {
         Member member = Member.of("email");
@@ -41,12 +44,46 @@ class ItemRepositoryTest {
         itemRepository.save(rare);
         itemRepository.save(normal);
         itemRepository.save(epic);
+        ids = List.of(normal.getId(), rare.getId(), epic.getId(), unique.getId());
     }
     @Test
     void item_ids_find() {
-        List<Item> items = itemRepository.findByIds(List.of(3L, 4L, 5L, 6L), by(ASC, "weapon.grade"));
+        List<Item> items = itemRepository.findByIds(ids, by(ASC, "weapon.grade"));
 
         assertThat(items).extracting("weapon.grade")
                 .containsExactly(NORMAL, RARE, EPIC, UNIQUE);
+    }
+
+    @Test
+    void order_test() {
+        Member member = Member.of("e");
+        memberRepository.save(member);
+
+        Item itemA = Item.of(member, Weapon.of(SWORD, RARE), 1, 1, false);
+        Item itemB = Item.of(member, Weapon.of(SPEAR, NORMAL), 31, 4, false);
+        Item itemC = Item.of(member, Weapon.of(AXE, EPIC), 26, 1, false);
+        Item itemD = Item.of(member, Weapon.of(SWORD, RARE), 125, 1, false);
+        itemRepository.save(itemA);
+        itemRepository.save(itemB);
+        itemRepository.save(itemC);
+        itemRepository.save(itemD);
+        List<Long> ids = List.of(itemA.getId(), itemB.getId(), itemC.getId(), itemD.getId());
+        String[] gradeOrder = {"weapon.grade", "star", "upgrade"};
+        String[] nameOrder = {"weapon.name", "weapon.grade", "star", "upgrade"};
+        List<Item> byIds = itemRepository.findByIds(ids, by(DESC, nameOrder));
+        /*
+        * 1. grade, name
+        * 2. grade -> name, name -> grade
+        * 3. star
+        * 4. upgrade
+        * */
+        for (Item byId : byIds) {
+            System.out.println(byId.getId() + " " + byId.getWeapon().getName() + " " + byId.getWeapon().getGrade() + " " + byId.getUpgrade() + " " + byId.getStar());
+        }
+        String s = "weapon.grade, weapon.name, star, upgrade";
+
+        for (String s1 : s.split(", ")) {
+            System.out.println(s1);
+        }
     }
 }

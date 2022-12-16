@@ -28,7 +28,8 @@ class StoreApiServiceTest {
         member.getMoney().amountIncrease(99999);
         memberRepository.save(member);
 
-        StoreItemDto result = sut.weaponPurchase(new RequestStorePurchaseDto(1L, Product.RANDOM_WEAPON_BOX));
+        RequestStorePurchaseDto dto = new RequestStorePurchaseDto(1L, Product.RANDOM_WEAPON_BOX);
+        StoreItemDto result = sut.weaponPurchase(dto.memberId(), dto.product());
 
         System.out.println(result.weapon().getName());
         System.out.println(result.weapon().getGrade());

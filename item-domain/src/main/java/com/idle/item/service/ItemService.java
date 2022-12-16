@@ -6,10 +6,12 @@ import com.idle.item.service.dto.GradeUpDto;
 import com.idle.item.service.dto.ResponseItemDto;
 import com.idle.random.RandomGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.data.domain.Sort.*;
 import static org.springframework.data.domain.Sort.Direction.*;
@@ -22,6 +24,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     private final RandomGenerator randomGenerator;
+
     public ResponseItemDto upgrade(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템 입니다."));
@@ -70,5 +73,10 @@ public class ItemService {
         item.endGradeUp(item.getMember().getMoney());
 
         return ResponseItemDto.toDto(item);
+    }
+
+    public void itemWear(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템입니다."));
     }
 }
