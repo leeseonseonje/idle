@@ -39,4 +39,9 @@ public class ItemController {
     public ResponseItemDto end(@PathVariable Long itemId) {
         return itemService.end(itemId);
     }
+
+    @GetMapping("/item/wearing/{itemId}")
+    public void wearingItems(@PathVariable Long itemId) {
+        itemService.itemWear(itemId);
+    }
 }
