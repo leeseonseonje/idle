@@ -38,9 +38,9 @@ public class ItemQueryController {
     }
 
     @GetMapping("/item/wearing/{memberId}")
-    public List<ResponseItemDto> wearingItems(@PathVariable Long memberId) {
-        List<Item> items = itemRepository.findByWearingItems(memberId);
+    public ResponseItemDto wearingItems(@PathVariable Long memberId) {
+        Item item = itemRepository.findByWearingItems(memberId);
 
-        return items.stream().map(ResponseItemDto::toDto).collect(toList());
+        return ResponseItemDto.toDto(item);
     }
 }

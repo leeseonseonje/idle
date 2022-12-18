@@ -88,4 +88,9 @@ public class Item {
 
         this.weapon = this.weapon.endGradeUp();
     }
+
+    public void itemWear(Item currentWearItem) {
+        this.isWear = true;
+        currentWearItem.isWear = false;
+    }
 }

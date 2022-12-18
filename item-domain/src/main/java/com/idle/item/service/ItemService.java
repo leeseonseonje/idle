@@ -78,5 +78,9 @@ public class ItemService {
     public void itemWear(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템입니다."));
+
+        Item currentWearItem = itemRepository.findByWearingItems(item.getMember().getId());
+
+        item.itemWear(currentWearItem);
     }
 }
