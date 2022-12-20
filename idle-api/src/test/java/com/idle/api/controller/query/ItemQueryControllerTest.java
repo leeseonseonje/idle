@@ -1,6 +1,6 @@
 package com.idle.api.controller.query;
 
-import com.idle.api.controller.sort.ItemsSort;
+import com.idle.api.controller.query.sort.ItemsSort;
 import com.idle.item.domain.Item;
 import com.idle.item.repository.ItemRepository;
 import com.idle.member.Member;
@@ -33,7 +33,7 @@ class ItemQueryControllerTest {
 
     @Test
     void member_item_list_order_param() throws Exception {
-        String[] condition = ItemsSort.NAME.condition();
+        String[] condition = ItemsSort.NAME.conditions();
         Sort sort = Sort.by(Sort.Direction.DESC, condition);
         BDDMockito.given(itemRepository.findByMemberId(1L, sort))
                 .willReturn(List.of(Item.of(Member.of("email"), Weapon.of(Name.SWORD, Grade.NORMAL), 0, 0, false)));

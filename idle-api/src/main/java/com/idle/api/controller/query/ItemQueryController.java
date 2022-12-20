@@ -1,7 +1,7 @@
 package com.idle.api.controller.query;
 
 import com.idle.api.controller.dto.response.ResponseItemDto;
-import com.idle.api.controller.sort.ItemsSort;
+import com.idle.api.controller.query.sort.ItemsSort;
 import com.idle.item.domain.Item;
 import com.idle.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class ItemQueryController {
 
     @GetMapping("/items/{memberId}")
     public List<ResponseItemDto> items(@PathVariable Long memberId, @RequestParam ItemsSort sort) {
-        List<Item> items = itemRepository.findByMemberId(memberId, by(DESC, sort.condition()));
+        List<Item> items = itemRepository.findByMemberId(memberId, by(DESC, sort.conditions()));
 
         return items.stream().map(ResponseItemDto::toDto).collect(toList());
     }

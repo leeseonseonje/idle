@@ -1,7 +1,6 @@
-package com.idle.api.controller.sort;
+package com.idle.api.controller.query.sort;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
 public enum ItemsSort {
@@ -11,7 +10,7 @@ public enum ItemsSort {
 
     private String order;
 
-    public String[] condition() {
+    public String[] conditions() {
         return this.order.split(", ");
     }
 }
