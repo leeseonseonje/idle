@@ -3,14 +3,17 @@ package com.idle.money.domain;
 import com.idle.money.exception.ShortOfMoneyException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static java.time.temporal.ChronoUnit.*;
+import static lombok.AccessLevel.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = PROTECTED)
 public class Money {
 
     @Id

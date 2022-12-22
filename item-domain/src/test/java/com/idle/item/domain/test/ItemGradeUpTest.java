@@ -1,4 +1,4 @@
-package com.idle.item;
+package com.idle.item.domain.test;
 
 import com.idle.item.domain.Item;
 import com.idle.money.domain.Money;
