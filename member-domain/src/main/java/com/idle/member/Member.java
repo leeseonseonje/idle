@@ -26,17 +26,21 @@ public class Member {
     @JoinColumn(name = "money_id")
     private Money money;
 
-    private String email;
+    private String nickName;
+
+    private String accessToken;
+
+    private String refreshToken;
 
     @Builder
-    private Member(String email) {
+    private Member(String nickName) {
         this.money = Money.of(0, LocalDateTime.now());
-        this.email = email;
+        this.nickName = nickName;
     }
 
-    public static Member of(String email) {
+    public static Member of(String nickName) {
         return Member.builder()
-                .email(email)
+                .nickName(nickName)
                 .build();
     }
 }
