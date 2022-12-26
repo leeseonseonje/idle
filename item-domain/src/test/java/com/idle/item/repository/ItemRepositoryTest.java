@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.idle.weapon.domain.Grade.*;
@@ -32,7 +31,7 @@ class ItemRepositoryTest {
 
     @BeforeEach
     void init() {
-        Member member = Member.of("email");
+        Member member = Member.simple("email");
         memberRepository.save(member);
 
         Item normal = Item.of(member, Weapon.of(SWORD, NORMAL), 0, 0, false);
@@ -56,7 +55,7 @@ class ItemRepositoryTest {
 
     @Test
     void order_test() {
-        Member member = Member.of("e");
+        Member member = Member.simple("e");
         memberRepository.save(member);
 
         Item itemA = Item.of(member, Weapon.of(SWORD, RARE), 1, 1, false);

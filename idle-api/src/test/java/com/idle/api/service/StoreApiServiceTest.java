@@ -24,7 +24,7 @@ class StoreApiServiceTest {
 
     @Test
     void weapon_purchase_item_save() {
-        Member member = Member.of("email@email.com");
+        Member member = Member.simple("email@email.com");
         member.getMoney().amountIncrease(99999);
         memberRepository.save(member);
 

@@ -13,13 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 import static com.idle.weapon.domain.Grade.*;
 import static com.idle.weapon.domain.Grade.UNIQUE;
@@ -117,7 +113,7 @@ class ItemServiceTest {
     }
 
     private Member createMember(int amount) {
-        Member member = memberRepository.save(Member.of("email"));
+        Member member = memberRepository.save(Member.simple("email"));
         member.getMoney().amountIncrease(amount);
         return member;
     }

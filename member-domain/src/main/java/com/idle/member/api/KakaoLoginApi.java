@@ -39,15 +39,13 @@ public class KakaoLoginApi {
                 .block();
     }
 
-    public void getMember(String type, String accessToken) {
+    public ResponseKakaoUser getMember(String type, String accessToken) {
         WebClient webClient = WebClient.create();
-        ResponseKakaoUser result = webClient.get()
+        return webClient.get()
                 .uri("https://kapi.kakao.com/v2/user/me")
                 .header("Authorization", type + " " + accessToken)
                 .retrieve()
                 .bodyToMono(ResponseKakaoUser.class)
                 .block();
-
-        System.out.println("result = " + result.id());
     }
 }

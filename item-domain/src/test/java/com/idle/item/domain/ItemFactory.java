@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class ItemFactory {
 
     public static Item createItem(Weapon weapon, int upgrade, int star, boolean isWear) {
-        return Item.of(Member.of("email"), weapon, upgrade, star, isWear);
+        return Item.of(Member.simple("email"), weapon, upgrade, star, isWear);
     }
 
     public static Money createMoney(int amount) {

@@ -19,7 +19,6 @@ import static lombok.AccessLevel.*;
 public class Member {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @OneToOne(fetch = LAZY, cascade = ALL)
@@ -33,14 +32,25 @@ public class Member {
     private String refreshToken;
 
     @Builder
-    private Member(String nickName) {
+    public Member(Long id, String nickName, String accessToken, String refreshToken) {
+        this.id = id;
         this.money = Money.of(0, LocalDateTime.now());
         this.nickName = nickName;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 
-    public static Member of(String nickName) {
+    public static Member simple(String nickName) {
         return Member.builder()
                 .nickName(nickName)
+                .build();
+    }
+
+    public static Member newMember(Long id, String accessToken, String refreshToken) {
+        return Member.builder()
+                .id(id)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 }

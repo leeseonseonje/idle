@@ -36,7 +36,7 @@ class ItemQueryControllerTest {
         String[] condition = ItemsSort.NAME.conditions();
         Sort sort = Sort.by(Sort.Direction.DESC, condition);
         BDDMockito.given(itemRepository.findByMemberId(1L, sort))
-                .willReturn(List.of(Item.of(Member.of("email"), Weapon.of(Name.SWORD, Grade.NORMAL), 0, 0, false)));
+                .willReturn(List.of(Item.of(Member.simple("email"), Weapon.of(Name.SWORD, Grade.NORMAL), 0, 0, false)));
 
         this.mockMvc.perform(get("/items/1")
                         .param("sort", "GRADE"))
