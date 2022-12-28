@@ -1,6 +1,0 @@
-oauth:
-  kakao:
-    grant: authorization_code
-    client_id: 7958b13d03a5d3da76452b89384cfa01
-    client_secret: fYvFZAOj1sQAzHlYwhwoM8bOTfqEsONm
-    redirect_uri: http://localhost:8080/oauth
