@@ -10,7 +10,7 @@ dependencies {
     testImplementation "org.testcontainers:mysql:1.17.3"
     testImplementation "org.testcontainers:junit-jupiter:1.17.3"
 
-//    implementation project(":main")
+    implementation project(":main")
     implementation project(":member-domain")
     implementation project(":money-domain")
     implementation project(":item-domain")
