@@ -1,5 +1,4 @@
 task prepareKotlinBuildScriptModel {}
 
 dependencies {
-    implementation project(":main")
 }

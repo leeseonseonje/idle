@@ -1,9 +1,10 @@
-package com.idle.member.api;
+package com.idle.oauth.api;
 
-import com.idle.member.api.dto.RequestKakaoToken;
-import com.idle.member.api.dto.ResponseKakaoToken;
-import com.idle.member.api.dto.ResponseKakaoUser;
+import com.idle.oauth.api.dto.RequestKakaoToken;
+import com.idle.oauth.api.dto.ResponseKakaoToken;
+import com.idle.oauth.api.dto.ResponseKakaoUser;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
@@ -11,6 +12,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
+@Profile("oauth")
 public class KakaoLoginApi {
 
     @Value("${oauth.kakao.grant}")

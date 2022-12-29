@@ -36,4 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 
-idle-api/src/main/resources/application.yml
+idle-api/src/main/resources/application-oauth.yml

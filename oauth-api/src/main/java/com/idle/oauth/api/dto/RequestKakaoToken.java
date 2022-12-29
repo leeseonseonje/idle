@@ -1,7 +1,6 @@
-package com.idle.member.api.dto;
+package com.idle.oauth.api.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.ToString;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 

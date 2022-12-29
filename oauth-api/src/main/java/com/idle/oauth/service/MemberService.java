@@ -1,15 +1,13 @@
-package com.idle.member.service;
+package com.idle.oauth.service;
 
 import com.idle.member.Member;
-import com.idle.member.api.KakaoLoginApi;
-import com.idle.member.api.dto.ResponseKakaoToken;
-import com.idle.member.api.dto.ResponseKakaoUser;
+import com.idle.oauth.api.KakaoLoginApi;
+import com.idle.oauth.api.dto.ResponseKakaoToken;
+import com.idle.oauth.api.dto.ResponseKakaoUser;
 import com.idle.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional

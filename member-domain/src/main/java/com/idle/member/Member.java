@@ -19,6 +19,7 @@ import static lombok.AccessLevel.*;
 public class Member {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @OneToOne(fetch = LAZY, cascade = ALL)

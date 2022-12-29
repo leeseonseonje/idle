@@ -15,14 +15,6 @@ import static org.assertj.core.api.Assertions.*;
 
 class ItemUpgradeTest {
 
-    static abstract class ab {
-    }
-
-    static class a extends ab {
-    }
-
-    static class b extends ab {
-    }
     @Test
     @DisplayName("아이템을 업그레이드 하면 돈이 차감되고, 무기가 1씩 업그레이드 된다.")
     void item_upgrade_plus() {

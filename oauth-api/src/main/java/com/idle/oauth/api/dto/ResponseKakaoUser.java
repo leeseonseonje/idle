@@ -1,4 +1,4 @@
-package com.idle.member.api.dto;
+package com.idle.oauth.api.dto;
 
 public record ResponseKakaoUser(
         Long id
