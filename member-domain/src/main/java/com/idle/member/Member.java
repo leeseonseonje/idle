@@ -28,15 +28,18 @@ public class Member {
 
     private String nickName;
 
+    private Long oauthId;
+
     private String accessToken;
 
     private String refreshToken;
 
     @Builder
-    public Member(Long id, String nickName, String accessToken, String refreshToken) {
+    public Member(Long id, String nickName, Long oauthId, String accessToken, String refreshToken) {
         this.id = id;
         this.money = Money.of(0, LocalDateTime.now());
         this.nickName = nickName;
+        this.oauthId = oauthId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
@@ -47,9 +50,9 @@ public class Member {
                 .build();
     }
 
-    public static Member newMember(Long id, String accessToken, String refreshToken) {
+    public static Member newMember(Long oauthId, String accessToken, String refreshToken) {
         return Member.builder()
-                .id(id)
+                .oauthId(oauthId)
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();

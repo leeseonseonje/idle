@@ -16,4 +16,5 @@ dependencies {
     implementation project(":item-domain")
     implementation project(":weapon-domain")
     implementation project(":store-domain")
+    implementation project(":oauth-api")
 }

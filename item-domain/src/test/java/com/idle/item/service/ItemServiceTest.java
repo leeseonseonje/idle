@@ -25,10 +25,8 @@ import static com.idle.weapon.domain.Name.SWORD;
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 
-//@DataJpaTest
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@SpringBootTest
-@Transactional
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class ItemServiceTest {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.idle.oauth.api;
+package com.idle.oauth.api.kakao;
 
 import com.idle.oauth.api.dto.RequestKakaoToken;
 import com.idle.oauth.api.dto.ResponseKakaoToken;
@@ -12,8 +12,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-@Profile("oauth")
-public class KakaoLoginApi {
+public class KakaoLoginApiImpl implements KakaoLoginApi {
 
     @Value("${oauth.kakao.grant}")
     private String grantType;
@@ -27,6 +26,7 @@ public class KakaoLoginApi {
     @Value("${oauth.kakao.redirect_uri}")
     private String redirectUri;
 
+    @Override
     public ResponseKakaoToken getToken(String code) {
         MultiValueMap<String, String> form = RequestKakaoToken
                 .toForm(grantType, clientId, clientSecret, redirectUri, code);
@@ -41,6 +41,7 @@ public class KakaoLoginApi {
                 .block();
     }
 
+    @Override
     public ResponseKakaoUser getMember(String type, String accessToken) {
         WebClient webClient = WebClient.create();
         return webClient.get()

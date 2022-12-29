@@ -1,7 +1,7 @@
 package com.idle.oauth.service;
 
 import com.idle.member.Member;
-import com.idle.oauth.api.KakaoLoginApi;
+import com.idle.oauth.api.kakao.KakaoLoginApi;
 import com.idle.oauth.api.dto.ResponseKakaoToken;
 import com.idle.oauth.api.dto.ResponseKakaoUser;
 import com.idle.member.repository.MemberRepository;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService {
+public class KakaoLoginService {
 
     private final KakaoLoginApi kakaoLoginApi;
 
@@ -21,11 +21,11 @@ public class MemberService {
     public Member kakaoLogin(String code) {
         ResponseKakaoToken response = kakaoLoginApi.getToken(code);
 
-        ResponseKakaoUser getMember = kakaoLoginApi.getMember("Bearer", response.accessToken());
-        return memberRepository.findById(getMember.id())
+        ResponseKakaoUser getMember = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
+        return memberRepository.findById(getMember.oauthId())
                 .orElseGet(
                         () -> memberRepository.save(
-                                Member.newMember(getMember.id(), response.accessToken(), response.refreshToken())
+                                Member.newMember(getMember.oauthId(), response.accessToken(), response.refreshToken())
                         )
                 );
     }
