@@ -22,7 +22,7 @@ public class KakaoLoginService {
         ResponseKakaoToken response = kakaoLoginApi.getToken(code);
 
         ResponseKakaoUser getMember = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
-        return memberRepository.findById(getMember.oauthId())
+        return memberRepository.findByOauthId(getMember.oauthId())
                 .orElseGet(
                         () -> memberRepository.save(
                                 Member.newMember(getMember.oauthId(), response.accessToken(), response.refreshToken())

@@ -26,7 +26,7 @@ public class Member {
     @JoinColumn(name = "money_id")
     private Money money;
 
-    private String nickName;
+    private String nickname;
 
     private Long oauthId;
 
@@ -35,18 +35,18 @@ public class Member {
     private String refreshToken;
 
     @Builder
-    public Member(Long id, String nickName, Long oauthId, String accessToken, String refreshToken) {
+    public Member(Long id, String nickname, Long oauthId, String accessToken, String refreshToken) {
         this.id = id;
         this.money = Money.of(0, LocalDateTime.now());
-        this.nickName = nickName;
+        this.nickname = nickname;
         this.oauthId = oauthId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
 
-    public static Member simple(String nickName) {
+    public static Member simple(String nickname) {
         return Member.builder()
-                .nickName(nickName)
+                .nickname(nickname)
                 .build();
     }
 
@@ -56,5 +56,9 @@ public class Member {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    public void naming(String nickname) {
+        this.nickname = nickname;
     }
 }

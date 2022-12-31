@@ -14,7 +14,12 @@ public class MemberController {
 
     private final KakaoLoginService kakaoLoginService;
 
-    @GetMapping("/oauth")
+    @GetMapping("/oauth/redirect")
+    public void redirect(@RequestParam String code) {
+        System.out.println(code);
+    }
+
+    @GetMapping("/kakao")
     public ResponseMemberDto oauth(@RequestParam String code) {
         Member member = kakaoLoginService.kakaoLogin(code);
         return ResponseMemberDto.toDto(member);
