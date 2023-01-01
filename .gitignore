@@ -37,3 +37,5 @@ out/
 .vscode/
 
 idle-api/src/main/resources/application-oauth.yml
+idle-api/src/main/resources/application-db.yml
+

@@ -26,7 +26,7 @@ public class MemberService {
         return nickname;
     }
 
-    public void nicknameDuplicateCheck(String nickname) {
+    private void nicknameDuplicateCheck(String nickname) {
         boolean isDuplicate = memberRepository.existsByNickname(nickname);
 
         if (isDuplicate) {

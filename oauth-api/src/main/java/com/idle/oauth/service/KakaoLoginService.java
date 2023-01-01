@@ -21,11 +21,11 @@ public class KakaoLoginService {
     public Member kakaoLogin(String code) {
         ResponseKakaoToken response = kakaoLoginApi.getToken(code);
 
-        ResponseKakaoUser getMember = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
-        return memberRepository.findByOauthId(getMember.oauthId())
+        ResponseKakaoUser kakaoUser = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
+        return memberRepository.findByOauthId(kakaoUser.id())
                 .orElseGet(
                         () -> memberRepository.save(
-                                Member.newMember(getMember.oauthId(), response.accessToken(), response.refreshToken())
+                                Member.newMember(kakaoUser.id(), response.accessToken(), response.refreshToken())
                         )
                 );
     }

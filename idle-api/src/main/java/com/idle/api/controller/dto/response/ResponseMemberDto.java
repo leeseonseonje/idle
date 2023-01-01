@@ -3,9 +3,9 @@ package com.idle.api.controller.dto.response;
 import com.idle.member.Member;
 
 public record ResponseMemberDto(
-        Long id,
+        Long memberId,
 
-        String nickName,
+        String nickname,
 
         String accessToken
 ) {
