@@ -4,6 +4,7 @@ import com.idle.money.domain.Money;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 
@@ -60,5 +61,12 @@ public class Member {
 
     public void naming(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void tokenReissue(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        if (StringUtils.hasText(refreshToken)) {
+            this.refreshToken = refreshToken;
+        }
     }
 }

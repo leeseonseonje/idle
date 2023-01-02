@@ -33,4 +33,14 @@ public class KakaoLoginService {
     public void tokenValidation(String accessToken) {
         kakaoLoginApi.getMember("Bearer", accessToken);
     }
+
+    public String tokenReissue(String accessToken) {
+        Member member = memberRepository.findByAccessToken(accessToken);
+
+        ResponseKakaoToken response = kakaoLoginApi.tokenReissue(member.getRefreshToken());
+
+        member.tokenReissue(response.accessToken(), response.refreshToken());
+
+        return member.getAccessToken();
+    }
 }

@@ -1,6 +1,7 @@
 package com.idle.oauth.api.kakao;
 
 import com.idle.oauth.api.dto.RequestKakaoToken;
+import com.idle.oauth.api.dto.RequestKakaoTokenReissue;
 import com.idle.oauth.api.dto.ResponseKakaoToken;
 import com.idle.oauth.api.dto.ResponseKakaoUser;
 import com.idle.oauth.exception.ExpiredAccessTokenException;
@@ -57,6 +58,21 @@ public class KakaoLoginApiImpl implements KakaoLoginApi {
                     return false;
                 }, error -> Mono.error(new RuntimeException()))
                 .bodyToMono(ResponseKakaoUser.class)
+                .block();
+    }
+
+    @Override
+    public ResponseKakaoToken tokenReissue(String refreshToken) {
+        MultiValueMap<String, String> form = RequestKakaoTokenReissue
+                .toForm("refresh_token", clientId, clientSecret, refreshToken);
+
+        WebClient webClient = WebClient.create();
+        return webClient.post()
+                .uri("https://kauth.kakao.com/oauth/token")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(BodyInserters.fromFormData(form))
+                .retrieve()
+                .bodyToMono(ResponseKakaoToken.class)
                 .block();
     }
 }

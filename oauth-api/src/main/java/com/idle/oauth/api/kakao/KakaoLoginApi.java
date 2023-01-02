@@ -8,4 +8,6 @@ public interface KakaoLoginApi {
     ResponseKakaoToken getToken(String code);
 
     ResponseKakaoUser getMember(String type, String accessToken);
+
+    ResponseKakaoToken tokenReissue(String refreshToken);
 }

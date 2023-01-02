@@ -24,9 +24,14 @@ public class MemberController {
     }
 
     @GetMapping("/oauth/kakao")
-    public ResponseMemberDto oauth(@RequestParam String code) {
+    public ResponseMemberDto kakaoLogin(@RequestParam String code) {
         Member member = kakaoLoginService.kakaoLogin(code);
         return ResponseMemberDto.toDto(member);
+    }
+
+    @GetMapping("/oauth/kakao/reissue/{accessToken}")
+    public String reissue(@PathVariable String accessToken) {
+        return kakaoLoginService.tokenReissue(accessToken);
     }
 
     @PostMapping("/member/nickname")
