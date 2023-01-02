@@ -1,0 +1,40 @@
+package com.idle.web.interceptor;
+
+import com.idle.oauth.api.kakao.KakaoLoginApi;
+import com.idle.oauth.exception.ExpiredAccessTokenException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static org.springframework.http.HttpStatus.*;
+
+@Component
+@RequiredArgsConstructor
+public class AccessTokenValidationInterceptor implements HandlerInterceptor {
+
+    private final KakaoLoginApi kakaoLoginApi;
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String accessToken = request.getHeader("Authorization");
+        try {
+            if (isForbidden(accessToken)) {
+                response.setStatus(FORBIDDEN.value());
+                return false;
+            }
+            kakaoLoginApi.getMember("Bearer", accessToken);
+        } catch (ExpiredAccessTokenException e) {
+            response.setStatus(UNAUTHORIZED.value());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isForbidden(String accessToken) {
+        return !StringUtils.hasText(accessToken);
+    }
+}

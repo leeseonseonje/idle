@@ -3,13 +3,14 @@ package com.idle.oauth.api.kakao;
 import com.idle.oauth.api.dto.RequestKakaoToken;
 import com.idle.oauth.api.dto.ResponseKakaoToken;
 import com.idle.oauth.api.dto.ResponseKakaoUser;
+import com.idle.oauth.exception.ExpiredAccessTokenException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Component
 public class KakaoLoginApiImpl implements KakaoLoginApi {
@@ -48,6 +49,13 @@ public class KakaoLoginApiImpl implements KakaoLoginApi {
                 .uri("https://kapi.kakao.com/v2/user/me")
                 .header("Authorization", type + " " + accessToken)
                 .retrieve()
+                .onStatus(httpStatus -> {
+                    System.out.println(httpStatus.value());
+                    if (httpStatus.value() == 401) {
+                        throw new ExpiredAccessTokenException("토큰 만료");
+                    }
+                    return false;
+                }, error -> Mono.error(new RuntimeException()))
                 .bodyToMono(ResponseKakaoUser.class)
                 .block();
     }

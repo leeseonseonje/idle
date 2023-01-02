@@ -29,4 +29,8 @@ public class KakaoLoginService {
                         )
                 );
     }
+
+    public void tokenValidation(String accessToken) {
+        kakaoLoginApi.getMember("Bearer", accessToken);
+    }
 }

@@ -8,6 +8,8 @@ import com.idle.oauth.service.KakaoLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
@@ -16,17 +18,18 @@ public class MemberController {
     private final KakaoLoginService kakaoLoginService;
 
     @GetMapping("/oauth/redirect")
-    public void redirect(@RequestParam String code) {
+    public void redirect(@RequestParam String code, HttpServletRequest request) {
         System.out.println(code);
+        System.out.println(request.getHeader("Authorization"));
     }
 
-    @GetMapping("/kakao")
+    @GetMapping("/oauth/kakao")
     public ResponseMemberDto oauth(@RequestParam String code) {
         Member member = kakaoLoginService.kakaoLogin(code);
         return ResponseMemberDto.toDto(member);
     }
 
-    @PostMapping("/nickname")
+    @PostMapping("/member/nickname")
     public String naming(@RequestBody RequestNamingDto reqeust) {
         return memberService.naming(reqeust.memberId(), reqeust.nickname());
     }

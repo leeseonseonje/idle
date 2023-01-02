@@ -1,3 +1,4 @@
+
 task prepareKotlinBuildScriptModel {}
 
 dependencies {
@@ -18,4 +19,5 @@ dependencies {
     implementation project(":weapon-domain")
     implementation project(":store-domain")
     implementation project(":oauth-api")
+    implementation project(":idle-web")
 }
