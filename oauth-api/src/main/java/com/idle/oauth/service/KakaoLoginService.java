@@ -35,7 +35,8 @@ public class KakaoLoginService {
     }
 
     public String tokenReissue(String accessToken) {
-        Member member = memberRepository.findByAccessToken(accessToken);
+        Member member = memberRepository.findByAccessToken(accessToken)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
 
         ResponseKakaoToken response = kakaoLoginApi.tokenReissue(member.getRefreshToken());
 

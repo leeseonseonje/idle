@@ -23,4 +23,10 @@ public class MemberExceptionController {
     public String expiredAccessToken(ExpiredAccessTokenException e) {
         return e.getMessage();
     }
+
+    @ResponseStatus(FORBIDDEN)
+    @ExceptionHandler(IllegalStateException.class)
+    public String notExistsMember(IllegalStateException e) {
+        return e.getMessage();
+    }
 }

@@ -19,8 +19,8 @@ public class MemberController {
 
     @GetMapping("/oauth/redirect")
     public void redirect(@RequestParam String code, HttpServletRequest request) {
-        System.out.println(code);
-        System.out.println(request.getHeader("Authorization"));
+//        System.out.println("##code = "  + code);
+//        System.out.println(request.getHeader("Authorization"));
     }
 
     @GetMapping("/oauth/kakao")

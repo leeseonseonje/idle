@@ -51,7 +51,6 @@ public class KakaoLoginApiImpl implements KakaoLoginApi {
                 .header("Authorization", type + " " + accessToken)
                 .retrieve()
                 .onStatus(httpStatus -> {
-                    System.out.println(httpStatus.value());
                     if (httpStatus.value() == 401) {
                         throw new ExpiredAccessTokenException("토큰 만료");
                     }

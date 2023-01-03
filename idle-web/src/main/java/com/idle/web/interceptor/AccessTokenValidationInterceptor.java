@@ -24,6 +24,7 @@ public class AccessTokenValidationInterceptor implements HandlerInterceptor {
         try {
             if (isForbidden(accessToken)) {
                 response.setStatus(FORBIDDEN.value());
+                System.out.println(accessToken);
                 return false;
             }
             kakaoLoginApi.getMember("Bearer", accessToken);
