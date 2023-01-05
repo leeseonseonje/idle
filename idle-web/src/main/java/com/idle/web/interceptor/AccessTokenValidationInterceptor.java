@@ -27,7 +27,7 @@ public class AccessTokenValidationInterceptor implements HandlerInterceptor {
                 System.out.println(accessToken);
                 return false;
             }
-            kakaoLoginApi.getMember("Bearer", accessToken);
+//            kakaoLoginApi.getMember("Bearer", accessToken);
         } catch (ExpiredAccessTokenException e) {
             response.setStatus(UNAUTHORIZED.value());
             return false;

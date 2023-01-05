@@ -33,4 +33,11 @@ public class MemberService {
             throw new DuplicateNicknameException("이미 사용중인 이름입니다.");
         }
     }
+
+    public void logout(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
+
+        member.logout();
+    }
 }

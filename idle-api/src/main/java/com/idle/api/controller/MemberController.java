@@ -31,11 +31,18 @@ public class MemberController {
 
     @GetMapping("/oauth/kakao/reissue/{accessToken}")
     public String reissue(@PathVariable String accessToken) {
-        return kakaoLoginService.tokenReissue(accessToken);
+//        return kakaoLoginService.tokenReissue(accessToken);
+        return "reissueAccessToken";
     }
 
     @PostMapping("/member/nickname")
     public String naming(@RequestBody RequestNamingDto reqeust) {
-        return memberService.naming(reqeust.memberId(), reqeust.nickname());
+//        return memberService.naming(reqeust.memberId(), reqeust.nickname());
+        throw new RuntimeException("slrspdla");
+    }
+
+    @GetMapping("/member/logout/{memberId}")
+    public void logout(@PathVariable Long memberId) {
+        memberService.logout(memberId);
     }
 }

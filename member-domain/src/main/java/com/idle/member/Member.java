@@ -69,4 +69,9 @@ public class Member {
             this.refreshToken = refreshToken;
         }
     }
+
+    public void logout() {
+        this.accessToken = null;
+        this.refreshToken = null;
+    }
 }
