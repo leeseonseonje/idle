@@ -15,7 +15,7 @@ public class MoneyController {
     private final MoneyService moneyService;
     private final MemberRepository memberRepository;
 
-    @PostMapping("/money/minute/{memberId}")
+    @GetMapping("/money/minute/{memberId}")
     public int perMinutePutMoney(@PathVariable Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));

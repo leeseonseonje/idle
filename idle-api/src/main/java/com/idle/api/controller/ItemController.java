@@ -15,12 +15,12 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @PatchMapping("/item/upgrade/{itemId}")
+    @GetMapping("/item/upgrade/{itemId}")
     public ResponseItemDto upgrade(@PathVariable Long itemId) {
         return itemService.upgrade(itemId);
     }
 
-    @PostMapping("/item/grade/{itemId}")
+    @GetMapping("/item/grade/{itemId}")
     public GradeUpDto gradeUp(@PathVariable Long itemId) {
         return itemService.gradeUp(itemId);
     }
@@ -30,17 +30,17 @@ public class ItemController {
         return itemService.synthesis(request.toList());
     }
 
-    @PostMapping("/item/star/{legendary1}/{legendary2}")
+    @GetMapping("/item/star/{legendary1}/{legendary2}")
     public ResponseItemDto starUp(@PathVariable Long legendary1, @PathVariable Long legendary2) {
         return itemService.starUp(List.of(legendary1, legendary2));
     }
 
-    @PostMapping("/item/end/{itemId}")
+    @GetMapping("/item/end/{itemId}")
     public ResponseItemDto end(@PathVariable Long itemId) {
         return itemService.end(itemId);
     }
 
-    @GetMapping("/item/wearing/{itemId}")
+    @GetMapping("/item/wear/{itemId}")
     public void wearingItems(@PathVariable Long itemId) {
         itemService.itemWear(itemId);
     }
