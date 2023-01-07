@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.*;
 @RestController
 public class StoreQueryController {
 
-    @GetMapping("/store/weapon/products")
+    @GetMapping("/stores/weapon/products")
     public List<ResponseStoreDto> weaponProducts() {
         return stream(Product.values()).map(ResponseStoreDto::toDto).collect(toList());
     }

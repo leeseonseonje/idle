@@ -15,32 +15,32 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/item/upgrade/{itemId}")
+    @PatchMapping("/items/upgrade/{itemId}")
     public ResponseItemDto upgrade(@PathVariable Long itemId) {
         return itemService.upgrade(itemId);
     }
 
-    @GetMapping("/item/grade/{itemId}")
+    @PatchMapping("/items/grade/{itemId}")
     public GradeUpDto gradeUp(@PathVariable Long itemId) {
         return itemService.gradeUp(itemId);
     }
 
-    @PostMapping("/item/synthesis")
+    @PostMapping("/items/synthesis")
     public ResponseItemDto synthesis(@RequestBody RequestItemSynthesisDto request) {
         return itemService.synthesis(request.toList());
     }
 
-    @GetMapping("/item/star/{legendary1}/{legendary2}")
+    @PostMapping("/items/star/{legendary1}/{legendary2}")
     public ResponseItemDto starUp(@PathVariable Long legendary1, @PathVariable Long legendary2) {
         return itemService.starUp(List.of(legendary1, legendary2));
     }
 
-    @GetMapping("/item/end/{itemId}")
+    @PatchMapping("/items/end/{itemId}")
     public ResponseItemDto end(@PathVariable Long itemId) {
         return itemService.end(itemId);
     }
 
-    @GetMapping("/item/wear/{itemId}")
+    @PatchMapping("/items/wear/{itemId}")
     public void wearingItems(@PathVariable Long itemId) {
         itemService.itemWear(itemId);
     }
