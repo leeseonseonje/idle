@@ -17,24 +17,6 @@ public class MemberController {
     private final MemberService memberService;
     private final KakaoLoginService kakaoLoginService;
 
-    @GetMapping("/oauth/redirect")
-    public void redirect(@RequestParam String code, HttpServletRequest request) {
-//        System.out.println("##code = "  + code);
-//        System.out.println(request.getHeader("Authorization"));
-    }
-
-    @GetMapping("/oauth/kakao")
-    public ResponseMemberDto kakaoLogin(@RequestParam String code) {
-        Member member = kakaoLoginService.kakaoLogin(code);
-        return ResponseMemberDto.toDto(member);
-    }
-
-    @GetMapping("/oauth/kakao/reissue/{accessToken}")
-    public String reissue(@PathVariable String accessToken) {
-//        return kakaoLoginService.tokenReissue(accessToken);
-        return "reissueAccessToken";
-    }
-
     @PostMapping("/member/nickname")
     public String naming(@RequestBody RequestNamingDto reqeust) {
 //        return memberService.naming(reqeust.memberId(), reqeust.nickname());
