@@ -19,7 +19,7 @@ public class AccessTokenValidationInterceptor implements HandlerInterceptor {
     private final KakaoLoginApi kakaoLoginApi;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String accessToken = request.getHeader("Authorization");
         try {
             if (isForbidden(accessToken)) {

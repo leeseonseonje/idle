@@ -22,14 +22,14 @@ public class ItemQueryController {
 
     private final ItemRepository itemRepository;
 
-    @GetMapping("/items/{memberId}")
+    @GetMapping("members/{memberId}/items")
     public List<ResponseItemDto> items(@PathVariable Long memberId, @RequestParam ItemsSort sort) {
         List<Item> items = itemRepository.findByMemberId(memberId, by(DESC, sort.conditions()));
 
         return items.stream().map(ResponseItemDto::toDto).collect(toList());
     }
 
-    @GetMapping("/item/{itemId}")
+    @GetMapping("/items/{itemId}")
     public ResponseItemDto itemDetails(@PathVariable Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템입니다."));
