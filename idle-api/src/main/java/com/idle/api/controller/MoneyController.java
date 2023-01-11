@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @RestController
+@RequestMapping("/money")
 @RequiredArgsConstructor
 public class MoneyController {
 
     private final MoneyService moneyService;
     private final MemberRepository memberRepository;
 
-    @GetMapping("/money/{memberId}")
+    @GetMapping("/{memberId}")
     public int perMinutePutMoney(@PathVariable Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
