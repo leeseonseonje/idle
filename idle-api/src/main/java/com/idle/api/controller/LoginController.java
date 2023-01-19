@@ -32,4 +32,9 @@ public class LoginController {
 //        return kakaoLoginService.tokenReissue(accessToken);
         return "reissueAccessToken";
     }
+
+    @GetMapping("/kakao/valid/token/{accessToken}")
+    public void tokenValidation(@PathVariable String accessToken) {
+        kakaoLoginService.tokenValidation(accessToken);
+    }
 }
