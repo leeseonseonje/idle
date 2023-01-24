@@ -36,4 +36,11 @@ public class ItemQueryController {
 
         return ResponseItemDto.toDto(item);
     }
+
+    @GetMapping("/members/{memberId}/items/wear")
+    public ResponseItemDto getWearItem(@PathVariable Long memberId) {
+        Item item = itemRepository.findByWearingItems(memberId);
+
+        return ResponseItemDto.toDto(item);
+    }
 }

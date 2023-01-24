@@ -16,6 +16,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("select i from Item i where i.member.id = :memberId")
     List<Item> findByMemberId(@Param("memberId") Long memberId, Sort sort);
 
-//    @Query("select i from Item i where i.member = :member and i.isWear = true")
-//    Item findByWearingItems(@Param("memberId") Long memberId);
+    @Query("select i from Item i where i.member.id = :memberId and i.isWear = true ")
+    Item findByWearingItems(@Param("memberId") Long memberId);
 }
