@@ -57,11 +57,15 @@ public class Money {
         long betweenMinute = betweenSeconds / 60;
         long remainingSeconds = betweenSeconds % 60;
 
-        int depositedAmount = (int) betweenMinute * 1000;
-        this.amountIncrease(depositedAmount);
+        if (betweenMinute == 0) {
+            return amount;
+        } else {
+            int depositedAmount = (int) betweenMinute * 1000;
+            this.amountIncrease(depositedAmount);
 
-        this.lastCollectMoneyTime = now.minusSeconds(remainingSeconds);
+            this.lastCollectMoneyTime = now.minusSeconds(remainingSeconds);
 
-        return depositedAmount;
+            return depositedAmount + amount;
+        }
     }
 }

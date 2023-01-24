@@ -35,6 +35,7 @@ public class LoginController {
 
     @GetMapping("/kakao/valid/token/{accessToken}")
     public void tokenValidation(@PathVariable String accessToken) {
+        System.out.println(accessToken);
         kakaoLoginService.tokenValidation(accessToken);
     }
 }

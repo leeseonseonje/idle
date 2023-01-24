@@ -21,6 +21,8 @@ public class MoneyController {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
 
+        int money = moneyService.perMinutePutMoney(member.getMoney(), LocalDateTime.now());
+        System.out.println(money);
         return moneyService.perMinutePutMoney(member.getMoney(), LocalDateTime.now());
     }
 }
