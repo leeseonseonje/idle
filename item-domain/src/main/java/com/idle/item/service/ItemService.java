@@ -1,6 +1,7 @@
 package com.idle.item.service;
 
 import com.idle.item.domain.Item;
+import com.idle.item.exception.NotWearItemException;
 import com.idle.item.repository.ItemRepository;
 import com.idle.item.service.dto.GradeUpDto;
 import com.idle.item.service.dto.ResponseItemDto;
@@ -79,7 +80,8 @@ public class ItemService {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이템입니다."));
 
-        Item currentWearItem = itemRepository.findByWearingItems(item.getMember().getId());
+        Item currentWearItem = itemRepository.findByWearingItems(item.getMember().getId())
+                .orElseThrow(() -> new NotWearItemException("장착중인 아이템이 없습니다."));
 
         item.itemWear(currentWearItem);
     }

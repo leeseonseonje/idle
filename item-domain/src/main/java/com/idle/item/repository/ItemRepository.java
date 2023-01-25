@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
@@ -17,5 +18,5 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByMemberId(@Param("memberId") Long memberId, Sort sort);
 
     @Query("select i from Item i where i.member.id = :memberId and i.isWear = true ")
-    Item findByWearingItems(@Param("memberId") Long memberId);
+    Optional<Item> findByWearingItems(@Param("memberId") Long memberId);
 }

@@ -3,6 +3,7 @@ package com.idle.api.controller.query;
 import com.idle.api.controller.dto.response.ResponseItemDto;
 import com.idle.api.controller.query.sort.ItemsSort;
 import com.idle.item.domain.Item;
+import com.idle.item.exception.NotWearItemException;
 import com.idle.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,8 @@ public class ItemQueryController {
 
     @GetMapping("/members/{memberId}/items/wear")
     public ResponseItemDto getWearItem(@PathVariable Long memberId) {
-        Item item = itemRepository.findByWearingItems(memberId);
+        Item item = itemRepository.findByWearingItems(memberId)
+                .orElseThrow(() -> new NotWearItemException("장착중인 아이템이 없습니다."));
 
         return ResponseItemDto.toDto(item);
     }
