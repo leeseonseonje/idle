@@ -23,8 +23,12 @@ public class LoginController {
 
     @GetMapping("/kakao")
     public ResponseMemberDto kakaoLogin(@RequestParam String code) {
+        System.out.println(code);
         Member member = kakaoLoginService.kakaoLogin(code);
-        return ResponseMemberDto.toDto(member);
+        ResponseMemberDto result = ResponseMemberDto.toDto(member);
+        System.out.println("result.accessToken() = " + result.accessToken());
+        System.out.println("result.accessToken() = " + result.memberId());
+        return result;
     }
 
     @GetMapping("/kakao/reissue/{accessToken}")

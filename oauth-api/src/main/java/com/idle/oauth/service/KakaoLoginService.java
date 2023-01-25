@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,14 +22,24 @@ public class KakaoLoginService {
 
     public Member kakaoLogin(String code) {
         ResponseKakaoToken response = kakaoLoginApi.getToken(code);
-
         ResponseKakaoUser kakaoUser = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
-        return memberRepository.findByOauthId(kakaoUser.id())
-                .orElseGet(
-                        () -> memberRepository.save(
-                                Member.newMember(kakaoUser.id(), response.accessToken(), response.refreshToken())
-                        )
-                );
+        Optional<Member> optionalMember = memberRepository.findByOauthId(kakaoUser.id());
+        if (optionalMember.isPresent()) {
+            return login(response, optionalMember);
+        } else {
+            return firstLogin(response, kakaoUser);
+        }
+    }
+
+    private Member firstLogin(ResponseKakaoToken response, ResponseKakaoUser kakaoUser) {
+        return memberRepository.save(
+                Member.newMember(kakaoUser.id(), response.accessToken(), response.refreshToken()));
+    }
+
+    private Member login(ResponseKakaoToken response, Optional<Member> optionalMember) {
+        Member findMember = optionalMember.get();
+        findMember.login(response.accessToken(), response.refreshToken());
+        return findMember;
     }
 
     public void tokenValidation(String accessToken) {

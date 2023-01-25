@@ -59,6 +59,11 @@ public class Member {
                 .build();
     }
 
+    public void login(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+    }
+
     public void naming(String nickname) {
         this.nickname = nickname;
     }
