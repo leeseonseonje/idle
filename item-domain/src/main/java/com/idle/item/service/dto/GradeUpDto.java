@@ -9,7 +9,7 @@ public record GradeUpDto(
         int upgrade
 ) {
 
-    public static GradeUpDto toDto(Item item) {
+    public static GradeUpDto createDto(Item item) {
         return new GradeUpDto(item.getId(), item.getWeapon(), item.getUpgrade());
     }
 }

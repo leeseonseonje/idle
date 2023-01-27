@@ -9,7 +9,7 @@ public record ResponseMoneyDto(
         LocalDateTime lastCollectMoneyTime
 ) {
 
-    public static ResponseMoneyDto toDto(Money money) {
+    public static ResponseMoneyDto createDto(Money money) {
         return new ResponseMoneyDto(money.getAmount(), money.getLastCollectMoneyTime());
     }
 }

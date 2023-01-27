@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class AccessTokenValidationInterceptor implements HandlerInterceptor {
 
-    private final OauthLoginApi kakaoLoginApi;
+    private final OauthLoginApi oauthLoginApi;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

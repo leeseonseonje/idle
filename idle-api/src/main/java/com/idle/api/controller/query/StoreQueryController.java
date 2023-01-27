@@ -15,6 +15,6 @@ public class StoreQueryController {
 
     @GetMapping("/stores/weapon/products")
     public List<ResponseStoreDto> weaponProducts() {
-        return stream(Product.values()).map(ResponseStoreDto::toDto).collect(toList());
+        return stream(Product.values()).map(ResponseStoreDto::createDto).collect(toList());
     }
 }

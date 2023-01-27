@@ -9,7 +9,7 @@ public record ResponseMemberDto(
 
         String accessToken
 ) {
-    public static ResponseMemberDto toDto(Member member) {
+    public static ResponseMemberDto createDto(Member member) {
         return new ResponseMemberDto(member.getId(), member.getNickname(), member.getAccessToken());
     }
 }

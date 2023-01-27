@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.idle.api.controller.dto.request.RequestStorePurchaseDto;
 import com.idle.api.service.StoreApiService;
 import com.idle.api.service.dto.StoreItemDto;
+import com.idle.oauth.api.OauthLoginApi;
 import com.idle.shop.domain.weapon.Product;
 import com.idle.weapon.domain.Grade;
 import com.idle.weapon.domain.Name;
@@ -32,6 +33,9 @@ class StoreControllerTest {
     @MockBean
     StoreApiService storeApiService;
 
+    @MockBean
+    OauthLoginApi oauthLoginApi;
+
 
     @Test
     void weapon_purchase_response() throws Exception {
@@ -42,7 +46,7 @@ class StoreControllerTest {
 
         when(storeApiService.weaponPurchase(request.memberId(), request.product())).thenReturn(response);
 
-        this.mockMvc.perform(post("/store/weapon")
+        this.mockMvc.perform(post("/stores/weapon")
                         .content(requestBody)
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())

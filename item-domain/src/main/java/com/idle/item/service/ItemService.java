@@ -32,7 +32,7 @@ public class ItemService {
 
         item.upgrade(item.getMember().getMoney());
 
-        return ResponseItemDto.toDto(item);
+        return ResponseItemDto.createDto(item);
     }
 
     public GradeUpDto gradeUp(Long itemId) {
@@ -41,7 +41,7 @@ public class ItemService {
 
         item.gradeUp(item.getMember().getMoney(), randomGenerator.generate(1000));
 
-        return GradeUpDto.toDto(item);
+        return GradeUpDto.createDto(item);
     }
 
     public ResponseItemDto synthesis(List<Long> itemIds) {
@@ -52,7 +52,7 @@ public class ItemService {
         itemRepository.deleteAll(items);
         Item savedItem = itemRepository.save(legendaryItem);
 
-        return ResponseItemDto.toDto(savedItem);
+        return ResponseItemDto.createDto(savedItem);
     }
 
     public ResponseItemDto starUp(List<Long> itemIds) {
@@ -64,7 +64,7 @@ public class ItemService {
 
         itemRepository.delete(legendary2);
 
-        return ResponseItemDto.toDto(legendary1);
+        return ResponseItemDto.createDto(legendary1);
     }
 
     public ResponseItemDto end(Long itemId) {
@@ -73,7 +73,7 @@ public class ItemService {
 
         item.endGradeUp(item.getMember().getMoney());
 
-        return ResponseItemDto.toDto(item);
+        return ResponseItemDto.createDto(item);
     }
 
     public void itemWear(Long itemId) {

@@ -31,10 +31,6 @@ class StoreApiServiceTest {
         RequestStorePurchaseDto dto = new RequestStorePurchaseDto(member.getId(), Product.RANDOM_WEAPON_BOX);
         StoreItemDto result = sut.weaponPurchase(dto.memberId(), dto.product());
 
-//        System.out.println(member.getId());
-//        System.out.println(member.getMoney().getId());
-//        System.out.println(result.weapon().getName());
-//        System.out.println(result.weapon().getGrade());
         assertThat(result.itemId()).isEqualTo(3L);
     }
 }

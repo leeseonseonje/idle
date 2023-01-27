@@ -10,7 +10,7 @@ public record ResponseItemDto(
         int star
 ) {
 
-    public static ResponseItemDto toDto(Item item) {
+    public static ResponseItemDto createDto(Item item) {
         return new ResponseItemDto(item.getId(), item.getWeapon(), item.getUpgrade(), item.getStar());
     }
 }

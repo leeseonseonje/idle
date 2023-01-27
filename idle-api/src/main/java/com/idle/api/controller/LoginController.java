@@ -22,7 +22,7 @@ public class LoginController {
     @GetMapping("/kakao")
     public ResponseMemberDto kakaoLogin(@RequestParam String code) {
         Member member = kakaoLoginService.kakaoLogin(code);
-        ResponseMemberDto result = ResponseMemberDto.toDto(member);
+        ResponseMemberDto result = ResponseMemberDto.createDto(member);
         return result;
     }
 

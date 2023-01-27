@@ -7,7 +7,7 @@ public record ResponseStoreDto(
         int price
 ) {
 
-    public static ResponseStoreDto toDto(Product product) {
+    public static ResponseStoreDto createDto(Product product) {
         return new ResponseStoreDto(product.getName(), product.getPrice());
     }
 }
