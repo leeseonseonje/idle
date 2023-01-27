@@ -1,6 +1,7 @@
 package com.idle.oauth.api.kakao;
 
-import com.idle.oauth.api.dto.ResponseKakaoUser;
+import com.idle.oauth.api.OauthLoginApi;
+import com.idle.oauth.api.dto.ResponseUserId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,12 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class KakaoLoginApiTest {
 
     @Autowired
-    KakaoLoginApi kakaoLoginApi;
+    OauthLoginApi kakaoLoginApi;
 
     @Test
     void access_token_expired() {
         //vFcPataoQtKoCXdU7wKq7IGxoaHCbRltchMTZn4DCj11GwAAAYVtusWW
-        ResponseKakaoUser member = kakaoLoginApi.getMember("bearer", "vFcPataoQtKoCXdU7wKq7IGxoaHCbRltchMTZn4DCj11GwAAAYVtusWW");
+        ResponseUserId member = kakaoLoginApi.getMember("bearer", "vFcPataoQtKoCXdU7wKq7IGxoaHCbRltchMTZn4DCj11GwAAAYVtusWW");
         System.out.println(member.id());
     }
 }

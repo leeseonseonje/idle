@@ -1,6 +1,6 @@
 package com.idle.oauth.api.dto;
 
-public record ResponseKakaoUser(
+public record ResponseUserId(
         Long id
 ) {
 }

@@ -1,9 +1,9 @@
 package com.idle.oauth.service;
 
 import com.idle.member.Member;
-import com.idle.oauth.api.kakao.KakaoLoginApi;
-import com.idle.oauth.api.dto.ResponseKakaoToken;
-import com.idle.oauth.api.dto.ResponseKakaoUser;
+import com.idle.oauth.api.OauthLoginApi;
+import com.idle.oauth.api.dto.ResponseToken;
+import com.idle.oauth.api.dto.ResponseUserId;
 import com.idle.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class KakaoLoginService {
 
-    private final KakaoLoginApi kakaoLoginApi;
+    private final OauthLoginApi kakaoLoginApi;
 
     private final MemberRepository memberRepository;
 
     public Member kakaoLogin(String code) {
-        ResponseKakaoToken response = kakaoLoginApi.getToken(code);
-        ResponseKakaoUser kakaoUser = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
+        ResponseToken response = kakaoLoginApi.getToken(code);
+        ResponseUserId kakaoUser = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
         Optional<Member> optionalMember = memberRepository.findByOauthId(kakaoUser.id());
         if (optionalMember.isPresent()) {
             return login(response, optionalMember);
@@ -31,12 +31,12 @@ public class KakaoLoginService {
         }
     }
 
-    private Member firstLogin(ResponseKakaoToken response, ResponseKakaoUser kakaoUser) {
+    private Member firstLogin(ResponseToken response, ResponseUserId kakaoUser) {
         return memberRepository.save(
                 Member.newMember(kakaoUser.id(), response.accessToken(), response.refreshToken()));
     }
 
-    private Member login(ResponseKakaoToken response, Optional<Member> optionalMember) {
+    private Member login(ResponseToken response, Optional<Member> optionalMember) {
         Member findMember = optionalMember.get();
         findMember.login(response.accessToken(), response.refreshToken());
         return findMember;
@@ -50,7 +50,7 @@ public class KakaoLoginService {
         Member member = memberRepository.findByAccessToken(accessToken)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
 
-        ResponseKakaoToken response = kakaoLoginApi.tokenReissue(member.getRefreshToken());
+        ResponseToken response = kakaoLoginApi.tokenReissue(member.getRefreshToken());
 
         member.tokenReissue(response.accessToken(), response.refreshToken());
 

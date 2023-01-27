@@ -1,31 +1,32 @@
 package com.idle.oauth.api.kakao;
 
-import com.idle.oauth.api.dto.ResponseKakaoToken;
-import com.idle.oauth.api.dto.ResponseKakaoUser;
+import com.idle.oauth.api.OauthLoginApi;
+import com.idle.oauth.api.dto.ResponseToken;
+import com.idle.oauth.api.dto.ResponseUserId;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class MockKaKaoLoginApi implements KakaoLoginApi {
+public class MockKaKaoLoginApi implements OauthLoginApi {
 
     private String refreshToken;
 
     @Override
-    public ResponseKakaoToken getToken(String code) {
-        return new ResponseKakaoToken(
+    public ResponseToken getToken(String code) {
+        return new ResponseToken(
                 "Bearer", "accessToken", "refreshToken", 1, 10
         );
     }
 
     @Override
-    public ResponseKakaoUser getMember(String type, String accessToken) {
-        return new ResponseKakaoUser(1L);
+    public ResponseUserId getMember(String type, String accessToken) {
+        return new ResponseUserId(1L);
     }
 
     @Override
-    public ResponseKakaoToken tokenReissue(String refreshToken) {
-        return new ResponseKakaoToken(
+    public ResponseToken tokenReissue(String refreshToken) {
+        return new ResponseToken(
                 "Bearer", "newAccessToken", this.refreshToken, 1, 10
         );
     }

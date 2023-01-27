@@ -15,7 +15,6 @@ public class MemberController {
     @PostMapping("/nickname")
     public String naming(@RequestBody RequestNamingDto reqeust) {
         return memberService.naming(reqeust.memberId(), reqeust.nickname());
-//        throw new RuntimeException("slrspdla");
     }
 
     @GetMapping("/logout/{memberId}")

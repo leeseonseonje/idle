@@ -1,6 +1,6 @@
 package com.idle.web.interceptor;
 
-import com.idle.oauth.api.kakao.KakaoLoginApi;
+import com.idle.oauth.api.OauthLoginApi;
 import com.idle.oauth.exception.ExpiredAccessTokenException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class AccessTokenValidationInterceptor implements HandlerInterceptor {
 
-    private final KakaoLoginApi kakaoLoginApi;
+    private final OauthLoginApi kakaoLoginApi;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

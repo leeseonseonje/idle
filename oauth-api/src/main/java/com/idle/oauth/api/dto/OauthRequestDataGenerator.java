@@ -5,18 +5,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 @AllArgsConstructor
-public class RequestKakaoToken {
-    private String grantType;
+public class OauthRequestDataGenerator {
 
-    private String clientId;
-
-    private String clientSecret;
-
-    private String redirectUri;
-
-    private String code;
-
-    public static MultiValueMap<String, String> toForm(
+    public static MultiValueMap<String, String> generateTokenIssueKakaoForm(
             String grantType, String clientId, String clientSecret, String redirectUri, String code
     ) {
         MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
@@ -25,6 +16,18 @@ public class RequestKakaoToken {
         form.add("client_secret", clientSecret);
         form.add("redirect_uri", redirectUri);
         form.add("code", code);
+
+        return form;
+    }
+
+    public static MultiValueMap<String, String> generateTokenReissueKakaoForm(
+            String grantType, String clientId, String clientSecret, String refreshToken
+    ) {
+        MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
+        form.add("grant_type", grantType);
+        form.add("client_id", clientId);
+        form.add("client_secret", clientSecret);
+        form.add("redirect_uri", refreshToken);
 
         return form;
     }

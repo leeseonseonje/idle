@@ -17,8 +17,6 @@ public class LoginController {
 
     @GetMapping("/redirect")
     public void redirect(@RequestParam String code, HttpServletRequest request) {
-//        System.out.println("##code = "  + code);
-//        System.out.println(request.getHeader("Authorization"));
     }
 
     @GetMapping("/kakao")
@@ -30,8 +28,7 @@ public class LoginController {
 
     @GetMapping("/kakao/reissue/{accessToken}")
     public String reissue(@PathVariable String accessToken) {
-//        return kakaoLoginService.tokenReissue(accessToken);
-        return "reissueAccessToken";
+        return kakaoLoginService.tokenReissue(accessToken);
     }
 
     @GetMapping("/kakao/valid/token/{accessToken}")

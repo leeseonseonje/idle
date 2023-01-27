@@ -1,9 +1,9 @@
-package com.idle.oauth.api.kakao;
+package com.idle.oauth.api;
 
-import com.idle.oauth.api.dto.RequestKakaoToken;
-import com.idle.oauth.api.dto.RequestKakaoTokenReissue;
-import com.idle.oauth.api.dto.ResponseKakaoToken;
-import com.idle.oauth.api.dto.ResponseKakaoUser;
+import com.idle.oauth.api.dto.OauthRequestDataGenerator;
+import com.idle.oauth.api.dto.TokenReissueDataGenerator;
+import com.idle.oauth.api.dto.ResponseToken;
+import com.idle.oauth.api.dto.ResponseUserId;
 import com.idle.oauth.exception.ExpiredAccessTokenException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
-public class KakaoLoginApiImpl implements KakaoLoginApi {
+public class KakaoLoginApiImpl implements OauthLoginApi {
 
     @Value("${oauth.kakao.grant}")
     private String grantType;
@@ -28,25 +28,25 @@ public class KakaoLoginApiImpl implements KakaoLoginApi {
     @Value("${oauth.kakao.redirect_uri}")
     private String redirectUri;
 
-    @Override
-    public ResponseKakaoToken getToken(String code) {
-        MultiValueMap<String, String> form = RequestKakaoToken
-                .toForm(grantType, clientId, clientSecret, redirectUri, code);
+    private final WebClient webClient = WebClient.create();
 
-        WebClient webClient = WebClient.create();
-        return webClient.post()
+    @Override
+    public ResponseToken getToken(String code) {
+        MultiValueMap<String, String> form = OauthRequestDataGenerator
+                .generateTokenIssueKakaoForm(grantType, clientId, clientSecret, redirectUri, code);
+
+        return this.webClient.post()
                 .uri("https://kauth.kakao.com/oauth/token")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData(form))
                 .retrieve()
-                .bodyToMono(ResponseKakaoToken.class)
+                .bodyToMono(ResponseToken.class)
                 .block();
     }
 
     @Override
-    public ResponseKakaoUser getMember(String type, String accessToken) {
-        WebClient webClient = WebClient.create();
-        return webClient.get()
+    public ResponseUserId getMember(String type, String accessToken) {
+        return this.webClient.get()
                 .uri("https://kapi.kakao.com/v2/user/me")
                 .header("Authorization", type + " " + accessToken)
                 .retrieve()
@@ -56,22 +56,21 @@ public class KakaoLoginApiImpl implements KakaoLoginApi {
                     }
                     return false;
                 }, error -> Mono.error(new RuntimeException()))
-                .bodyToMono(ResponseKakaoUser.class)
+                .bodyToMono(ResponseUserId.class)
                 .block();
     }
 
     @Override
-    public ResponseKakaoToken tokenReissue(String refreshToken) {
-        MultiValueMap<String, String> form = RequestKakaoTokenReissue
-                .toForm("refresh_token", clientId, clientSecret, refreshToken);
+    public ResponseToken tokenReissue(String refreshToken) {
+        MultiValueMap<String, String> form = OauthRequestDataGenerator
+                .generateTokenReissueKakaoForm("refresh_token", clientId, clientSecret, refreshToken);
 
-        WebClient webClient = WebClient.create();
-        return webClient.post()
+        return this.webClient.post()
                 .uri("https://kauth.kakao.com/oauth/token")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData(form))
                 .retrieve()
-                .bodyToMono(ResponseKakaoToken.class)
+                .bodyToMono(ResponseToken.class)
                 .block();
     }
 }
