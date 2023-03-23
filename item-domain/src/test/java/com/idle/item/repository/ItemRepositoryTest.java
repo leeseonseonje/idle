@@ -7,6 +7,7 @@ import com.idle.weapon.domain.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import static org.springframework.data.domain.Sort.*;
 import static org.springframework.data.domain.Sort.Direction.*;
 
 @DataJpaTest
-
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class ItemRepositoryTest {
 
     @Autowired
@@ -31,7 +32,7 @@ class ItemRepositoryTest {
 
     @BeforeEach
     void init() {
-        Member member = Member.simple("email");
+        Member member = Member.builder().build();
         memberRepository.save(member);
 
         Item normal = Item.of(member, Weapon.of(SWORD, NORMAL), 0, 0, false);

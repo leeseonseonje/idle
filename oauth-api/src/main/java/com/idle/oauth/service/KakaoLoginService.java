@@ -33,7 +33,7 @@ public class KakaoLoginService {
 
     private Member firstLogin(ResponseToken response, ResponseUserId kakaoUser) {
         return memberRepository.save(
-                Member.newMember(kakaoUser.id(), response.accessToken(), response.refreshToken()));
+                Member.firstLogin(kakaoUser.id(), response.accessToken(), response.refreshToken()));
     }
 
     private Member login(ResponseToken response, Optional<Member> optionalMember) {

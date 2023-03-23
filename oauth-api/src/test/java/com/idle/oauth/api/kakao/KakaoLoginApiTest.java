@@ -2,6 +2,8 @@ package com.idle.oauth.api.kakao;
 
 import com.idle.oauth.api.OauthLoginApi;
 import com.idle.oauth.api.dto.ResponseUserId;
+import com.idle.oauth.exception.ExpiredAccessTokenException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,8 +16,7 @@ public class KakaoLoginApiTest {
 
     @Test
     void access_token_expired() {
-        //vFcPataoQtKoCXdU7wKq7IGxoaHCbRltchMTZn4DCj11GwAAAYVtusWW
-        ResponseUserId member = kakaoLoginApi.getMember("bearer", "vFcPataoQtKoCXdU7wKq7IGxoaHCbRltchMTZn4DCj11GwAAAYVtusWW");
-        System.out.println(member.id());
+        Assertions.assertThatThrownBy(() -> kakaoLoginApi.getMember("bearer", "accessToken"))
+                .isInstanceOf(ExpiredAccessTokenException.class);
     }
 }

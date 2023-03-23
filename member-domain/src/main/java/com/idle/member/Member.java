@@ -51,7 +51,7 @@ public class Member {
                 .build();
     }
 
-    public static Member newMember(Long oauthId, String accessToken, String refreshToken) {
+    public static Member firstLogin(Long oauthId, String accessToken, String refreshToken) {
         return Member.builder()
                 .oauthId(oauthId)
                 .accessToken(accessToken)

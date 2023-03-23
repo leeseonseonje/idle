@@ -20,6 +20,7 @@ class MoneyServiceTest {
 
         int result = sut.perMinutePutMoney(money,
                 LocalDateTime.of(2020, 12, 1, 11, 0, 50));
+
         assertThat(result).isEqualTo(60000);
         assertThat(money.getLastCollectMoneyTime()).isEqualTo("2020-12-01T11:00:30");
     }

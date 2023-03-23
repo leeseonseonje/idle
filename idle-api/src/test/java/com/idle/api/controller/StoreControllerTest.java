@@ -44,7 +44,7 @@ class StoreControllerTest {
         StoreItemDto response = new StoreItemDto(2L, Weapon.of(Name.SWORD, Grade.NORMAL));
         String responseBody = objectMapper.writeValueAsString(response);
 
-        when(storeApiService.weaponPurchase(request.memberId(), request.product())).thenReturn(response);
+        when(storeApiService.weaponPurchase(1L, request.product())).thenReturn(response);
 
         this.mockMvc.perform(post("/stores/weapon")
                         .content(requestBody)

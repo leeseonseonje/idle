@@ -1,4 +1,12 @@
 spring:
+  profiles:
+    active: local
+    include:
+      - oauth
+    group:
+      local:
+        - oauth-local
+
   datasource:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     url: jdbc:tc:mysql:8:///idle

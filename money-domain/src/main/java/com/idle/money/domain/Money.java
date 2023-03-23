@@ -65,7 +65,7 @@ public class Money {
 
             this.lastCollectMoneyTime = now.minusSeconds(remainingSeconds);
 
-            return depositedAmount + amount;
+            return amount;
         }
     }
 }

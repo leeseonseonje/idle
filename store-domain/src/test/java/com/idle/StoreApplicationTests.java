@@ -1,13 +1,12 @@
-package com.idle.web;
+package com.idle;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IdleWebApplicationTests {
+public class StoreApplicationTests {
 
     @Test
     void contextLoads() {
     }
-
 }
