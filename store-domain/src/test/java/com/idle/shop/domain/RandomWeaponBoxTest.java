@@ -2,6 +2,7 @@ package com.idle.shop.domain;
 
 import com.idle.money.domain.Money;
 import com.idle.random.MockRandomGenerator;
+import com.idle.shop.domain.weapon.Product;
 import com.idle.shop.domain.weapon.RandomWeaponBox;
 import com.idle.shop.domain.weapon.WeaponStore;
 import com.idle.weapon.domain.Weapon;
@@ -24,5 +25,11 @@ class RandomWeaponBoxTest {
 
         assertThat(weapon.getName()).isEqualTo(SWORD);
         assertThat(weapon.getGrade()).isEqualTo(NORMAL);
+    }
+
+    @Test
+    void t() {
+        Product product = Product.valueOf(Product.class, "RANDOM_WEAPON_BOX");
+        System.out.println(product);
     }
 }
