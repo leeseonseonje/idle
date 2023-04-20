@@ -8,7 +8,7 @@
 ## ERD
 ![idle](https://user-images.githubusercontent.com/72899707/233398865-71094549-8408-4a8d-a73b-21da1e27960f.png)
 
-## Do
+## did
 - multi-module을 이용한 의존성 관리
 
 - OAuth2를 이용하여 카카오 소셜 로그인 기능 구현
