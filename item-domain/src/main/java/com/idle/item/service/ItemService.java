@@ -57,14 +57,14 @@ public class ItemService {
 
     public ResponseItemDto starUp(List<Long> itemIds) {
         List<Item> items = itemRepository.findAllById(itemIds);
-        Item legendary1 = items.get(0);
-        Item legendary2 = items.get(1);
+        Item item1 = items.get(0);
+        Item item2 = items.get(1);
 
-        legendary1.starUp(legendary2);
+        item1.starUp(item2);
 
-        itemRepository.delete(legendary2);
+        itemRepository.delete(item2);
 
-        return ResponseItemDto.createDto(legendary1);
+        return ResponseItemDto.createDto(item1);
     }
 
     public ResponseItemDto end(Long itemId) {

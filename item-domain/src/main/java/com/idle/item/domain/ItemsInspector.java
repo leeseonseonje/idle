@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+import static com.idle.weapon.domain.Grade.END;
 import static com.idle.weapon.domain.Grade.LEGENDARY;
 
 @AllArgsConstructor
@@ -24,9 +25,9 @@ public class ItemsInspector {
         }
     }
 
-    protected void checkStarUp(Item legendary2) {
-        isSameName(legendary2.getWeapon());
-        isLegendaryGrade(legendary2.getWeapon());
+    protected void checkStarUp(Item item2) {
+        isSameName(item2.getWeapon());
+        isLegendaryGradeOrHigher(item2.getWeapon());
     }
 
     protected void checkEndGradeUp() {
@@ -53,9 +54,10 @@ public class ItemsInspector {
         }
     }
 
-    private void isLegendaryGrade(Weapon legendary2) {
-        if (this.item.getWeapon().getGrade() != LEGENDARY || legendary2.getGrade() != LEGENDARY) {
-            throw new SynthesisFailedException("레전더리 등급끼리만 합성이 가능합니다.");
+    private void isLegendaryGradeOrHigher(Weapon item2) {
+        if (this.item.getWeapon().getGrade() != LEGENDARY || item2.getGrade() != LEGENDARY) {
+            if (this.item.getWeapon().getGrade() != END || item2.getGrade() != END)
+            throw new SynthesisFailedException("레전더리등급 이상의 같은 등급끼리만 합성이 가능합니다.");
         }
     }
 }

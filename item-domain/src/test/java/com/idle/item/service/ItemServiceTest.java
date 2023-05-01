@@ -82,19 +82,19 @@ class ItemServiceTest {
     }
 
     @Test
-    @DisplayName("레전더리 무기 두개를 합성하면 별이 증가한다. 하나의 무기는 삭제된다.")
+    @DisplayName("레전더리등급 이상의 무기 두개를 합성하면 별이 증가한다. 하나의 무기는 삭제된다.")
     public void legendary_plus_legendary_star_up() {
         ItemService sut = new ItemService(itemRepository, null);
         Member member = createMember(1000);
-        Item legendary1 = createItem(member, Weapon.of(SWORD, LEGENDARY));
-        Item legendary2 = createItem(member, Weapon.of(SWORD, LEGENDARY));
-        legendary2.upgrade(member.getMoney());
+        Item item1 = createItem(member, Weapon.of(SWORD, LEGENDARY));
+        Item item2 = createItem(member, Weapon.of(SWORD, LEGENDARY));
+        item2.upgrade(member.getMoney());
 
-        ResponseItemDto result = sut.starUp(List.of(legendary1.getId(), legendary2.getId()));
+        ResponseItemDto result = sut.starUp(List.of(item1.getId(), item2.getId()));
 
         assertThat(result.star()).isEqualTo(1);
         assertThat(result.upgrade()).isEqualTo(1);
-        assertThatThrownBy(() -> itemRepository.findById(legendary2.getId()).get())
+        assertThatThrownBy(() -> itemRepository.findById(item2.getId()).get())
                 .isInstanceOf(NoSuchElementException.class);
     }
 

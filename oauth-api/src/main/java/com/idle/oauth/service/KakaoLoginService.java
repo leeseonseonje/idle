@@ -21,24 +21,24 @@ public class KakaoLoginService {
     private final MemberRepository memberRepository;
 
     public Member kakaoLogin(String code) {
-        ResponseToken response = kakaoLoginApi.getToken(code);
-        ResponseUserId kakaoUser = kakaoLoginApi.getMember(response.tokenType(), response.accessToken());
+        ResponseToken token = kakaoLoginApi.getToken(code);
+        ResponseUserId kakaoUser = kakaoLoginApi.getMember(token.tokenType(), token.accessToken());
         Optional<Member> optionalMember = memberRepository.findByOauthId(kakaoUser.id());
+
         if (optionalMember.isPresent()) {
-            return login(response, optionalMember);
-        } else {
-            return firstLogin(response, kakaoUser);
+            return login(token, optionalMember);
         }
+        return firstLogin(token, kakaoUser);
     }
 
-    private Member firstLogin(ResponseToken response, ResponseUserId kakaoUser) {
+    private Member firstLogin(ResponseToken token, ResponseUserId kakaoUser) {
         return memberRepository.save(
-                Member.firstLogin(kakaoUser.id(), response.accessToken(), response.refreshToken()));
+                Member.firstLogin(kakaoUser.id(), token.accessToken(), token.refreshToken()));
     }
 
-    private Member login(ResponseToken response, Optional<Member> optionalMember) {
+    private Member login(ResponseToken token, Optional<Member> optionalMember) {
         Member findMember = optionalMember.get();
-        findMember.login(response.accessToken(), response.refreshToken());
+        findMember.login(token.accessToken(), token.refreshToken());
         return findMember;
     }
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/oauth")
 @RequiredArgsConstructor
-public class LoginController {
+public class KakaoController {
 
     private final KakaoLoginService kakaoLoginService;
 

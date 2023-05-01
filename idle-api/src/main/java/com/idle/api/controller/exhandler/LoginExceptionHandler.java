@@ -1,6 +1,6 @@
 package com.idle.api.controller.exhandler;
 
-import com.idle.api.controller.LoginController;
+import com.idle.api.controller.KakaoController;
 import com.idle.oauth.exception.ExpiredAccessTokenException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Slf4j
-@RestControllerAdvice(assignableTypes = LoginController.class)
+@RestControllerAdvice(assignableTypes = KakaoController.class)
 public class LoginExceptionHandler {
 
     @ResponseStatus(UNAUTHORIZED)

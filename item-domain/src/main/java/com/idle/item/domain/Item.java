@@ -75,11 +75,11 @@ public class Item {
         return Item.of(this.member, legendaryWeapon, 0, 0, false);
     }
 
-    public void starUp(Item legendary2) {
-        new ItemsInspector(this).checkStarUp(legendary2);
+    public void starUp(Item item2) {
+        new ItemsInspector(this).checkStarUp(item2);
 
         this.star++;
-        this.upgrade += legendary2.upgrade;
+        this.upgrade += item2.upgrade;
     }
 
     public void endGradeUp(Money money) {
