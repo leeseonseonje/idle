@@ -1,38 +1,35 @@
 version: "3"
 
 services:
-  docker-hello-app:
-    build: .
+  idle-api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
     ports:
       - 8080:8080
-    container_name: docker-hello-app
+    container_name: idle-api
     restart: always
     depends_on:
-      - docker-hello-mariadb
+      - idle-db
     networks:
-      - hello-docker-network
+      - idle-network
 
-  docker-hello-mariadb:
-    image: mariadb
-    container_name: docker-hello-mariadb
+  idle-db:
+    image: mysql
+    container_name: idle-db
     ports:
-      - 3307:3307
-    volumes:
-      - ./db/conf.d:/etc/mysql/conf.d
-    env_file: .env
+      - 5507:3306
     environment:
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: idle
+      LANG: C.UTF-8
       TZ: Asia/Seoul
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     networks:
-      - hello-docker-network
-
-  docker-hello-redis:
-    image: redis
-    container_name: docker-hello-redis
-    hostname: redis
-    ports:
-      - 6379:6379
-    networks:
-      - hello-docker-network
+      - idle-network
 
 networks:
-  hello-docker-network:
+  idle-network:
