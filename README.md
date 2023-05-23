@@ -10,7 +10,16 @@
 - end 등급 업은 legendary등급인 무기가 10성 이상이 되면 등급 업 할 수 있다.
 
 ## Skills
-- Java17, Spring Boot, Sprinb Data JPA, MySQL
+- Java17, Spring Boot, Spring Data JPA, MySQL
+
+## 실행 방법
+1. git clone https://github.com/leeseonseonje/idle.git
+
+2. idle-api/src/main/resources application-oauth-sample.yml파일을 참고하여idle-api/src/main/resources application-oauth.yml 파일 작성
+
+3. 프로젝트 루트 디렉토리에서 ./gradlew idle-api:bootJar
+
+4. 프로젝트 루트 디렉토리에서 docker-compose up
 
 ## ERD
 ![idle](https://user-images.githubusercontent.com/72899707/233398865-71094549-8408-4a8d-a73b-21da1e27960f.png)
