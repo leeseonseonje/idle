@@ -10,7 +10,7 @@
 - end 등급 업은 legendary등급인 무기가 10성 이상이 되면 등급 업 할 수 있다.
 
 ## Skills
-- Java17, Spring Boot, Spring Data JPA, MySQL
+- Java17, Spring Boot, Spring Data JPA, Spring Rest Docs, MySQL
 
 ## 실행 방법
 1. git clone https://github.com/leeseonseonje/idle.git
@@ -21,6 +21,9 @@
 
 4. 프로젝트 루트 디렉토리에서 docker-compose up
 
+## API Spec (Spring Rest Docs)
+- http://localhost:8080/docs/api.html
+
 ## ERD
 ![idle](https://user-images.githubusercontent.com/72899707/233398865-71094549-8408-4a8d-a73b-21da1e27960f.png)
 
@@ -30,3 +33,5 @@
 - OAuth2를 이용하여 카카오 소셜 로그인 기능 구현
 
 - 각 사용자들의 마지막 update 시간을 저장한 후 각 사용자가 접속 하거나 갱신할때의 시간과 저장된 마지막 update 시간을 비교해 일괄 처리
+
+- Spring Rest Docs로 API 문서 작성
