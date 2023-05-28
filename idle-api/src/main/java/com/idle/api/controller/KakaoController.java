@@ -16,7 +16,7 @@ public class KakaoController {
     private final KakaoLoginService kakaoLoginService;
 
     @GetMapping("/redirect")
-    public void redirect(@RequestParam String code, HttpServletRequest request) {
+    public void redirect(@RequestParam String code) {
     }
 
     @GetMapping("/kakao")

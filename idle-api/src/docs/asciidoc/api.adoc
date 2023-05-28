@@ -1,0 +1,220 @@
+= Spring REST Docs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[resources-post]]
+== Stores
+
+[[resources-post-create]]
+=== 상품 목록
+
+==== HTTP request
+
+include::{snippets}/store-product-list/http-request.adoc[]
+include::{snippets}/store-product-list/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/store-product-list/http-response.adoc[]
+include::{snippets}/store-product-list/response-fields.adoc[]
+
+=== 상품 구입
+
+==== HTTP request
+
+include::{snippets}/store-product-purchase/http-request.adoc[]
+include::{snippets}/store-product-purchase/request-fields.adoc[]
+include::{snippets}/store-product-purchase/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/store-product-purchase/http-response.adoc[]
+include::{snippets}/store-product-purchase/response-fields.adoc[]
+
+== items
+
+=== 보유중인 아이템 목록
+
+==== HTTP request
+
+include::{snippets}/items/http-request.adoc[]
+include::{snippets}/items/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/items/http-response.adoc[]
+include::{snippets}/items/response-fields.adoc[]
+
+=== 아이템 상세 정보
+
+==== HTTP request
+
+include::{snippets}/items-details/http-request.adoc[]
+include::{snippets}/items-details/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/items-details/http-response.adoc[]
+include::{snippets}/items-details/response-fields.adoc[]
+
+=== 착용 아이템 정보
+
+==== HTTP request
+
+include::{snippets}/wear-items/http-request.adoc[]
+include::{snippets}/wear-items/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/wear-items/http-response.adoc[]
+include::{snippets}/wear-items/response-fields.adoc[]
+
+=== 아이템 업그레이드
+
+==== HTTP request
+
+include::{snippets}/item_upgrade/http-request.adoc[]
+include::{snippets}/item_upgrade/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/item_upgrade/http-response.adoc[]
+include::{snippets}/item_upgrade/response-fields.adoc[]
+
+=== 아이템 등급 업
+
+==== HTTP request
+
+include::{snippets}/item_grade_up/http-request.adoc[]
+include::{snippets}/item_grade_up/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/item_grade_up/http-response.adoc[]
+include::{snippets}/item_grade_up/response-fields.adoc[]
+
+
+=== 아이템 합성
+
+==== HTTP request
+
+include::{snippets}/item_synthesis/http-request.adoc[]
+include::{snippets}/item_synthesis/curl-request.adoc[]
+include::{snippets}/item_synthesis/request-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/item_synthesis/http-response.adoc[]
+include::{snippets}/item_synthesis/response-fields.adoc[]
+
+=== 아이템 star 업
+
+==== HTTP request
+
+include::{snippets}/item_star_up/http-request.adoc[]
+include::{snippets}/item_star_up/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/item_star_up/http-response.adoc[]
+include::{snippets}/item_star_up/response-fields.adoc[]
+
+=== 아이템 end
+
+==== HTTP request
+
+include::{snippets}/item_end/http-request.adoc[]
+include::{snippets}/item_end/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/item_end/http-response.adoc[]
+include::{snippets}/item_end/response-fields.adoc[]
+
+=== 아이템 착용
+
+==== HTTP request
+
+include::{snippets}/item_wearing/http-request.adoc[]
+include::{snippets}/item_wearing/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/item_wearing/http-response.adoc[]
+
+== Oauth2
+
+=== Oauth2 redirect uri
+
+==== HTTP request
+
+include::{snippets}/oauth-redirect-uri/http-request.adoc[]
+include::{snippets}/oauth-redirect-uri/curl-request.adoc[]
+include::{snippets}/oauth-redirect-uri/request-parameters.adoc[]
+
+==== HTTP response
+
+include::{snippets}/oauth-redirect-uri/http-response.adoc[]
+
+=== kakao 로그인
+
+==== HTTP request
+
+include::{snippets}/oauth-kakao-login/http-request.adoc[]
+include::{snippets}/oauth-kakao-login/curl-request.adoc[]
+include::{snippets}/oauth-kakao-login/request-parameters.adoc[]
+
+==== HTTP response
+
+include::{snippets}/oauth-kakao-login/http-response.adoc[]
+include::{snippets}/oauth-kakao-login/response-fields.adoc[]
+
+=== kakao 토큰 재발급
+
+==== HTTP request
+
+include::{snippets}/token-reissue/http-request.adoc[]
+include::{snippets}/token-reissue/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/token-reissue/http-response.adoc[]
+
+== Member
+
+=== 닉네임 설정
+
+==== HTTP request
+
+include::{snippets}/member-naming/http-request.adoc[]
+include::{snippets}/member-naming/curl-request.adoc[]
+include::{snippets}/member-naming/request-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/member-naming/http-response.adoc[]
+
+=== 로그아웃
+
+==== HTTP request
+
+include::{snippets}/member-logout/http-request.adoc[]
+include::{snippets}/member-logout/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/member-logout/http-response.adoc[]
+
+== Money
+
+=== Money Put
+
+==== HTTP request
+
+include::{snippets}/money_put/http-request.adoc[]
+include::{snippets}/money_put/curl-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/money_put/http-response.adoc[]

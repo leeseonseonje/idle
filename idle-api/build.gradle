@@ -1,7 +1,22 @@
 
+plugins {
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
+}
+
 task prepareKotlinBuildScriptModel {}
 
+configurations {
+    asciidoctorExt
+}
+
+ext {
+    asciidocVersion = "2.0.6.RELEASE"
+    snippetsDir = file('build/generated-snippets')
+}
+
 dependencies {
+
+    implementation 'org.testng:testng:7.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -14,6 +29,10 @@ dependencies {
     testImplementation "org.testcontainers:mysql:1.17.3"
     testImplementation "org.testcontainers:junit-jupiter:1.17.3"
 
+    asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:${asciidocVersion}"
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:${asciidocVersion}"
+//    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+
     implementation project(":member-domain")
     implementation project(":money-domain")
     implementation project(":item-domain")
@@ -21,4 +40,22 @@ dependencies {
     implementation project(":store-domain")
     implementation project(":oauth-api")
     implementation project(":idle-web")
+}
+
+test {
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    configurations 'asciidoctorExt'
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    copy {
+        from asciidoctor.outputDir
+        into "src/main/resources/static/docs"
+    }
 }

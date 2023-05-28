@@ -17,7 +17,7 @@ public class MemberController {
         return memberService.naming(reqeust.memberId(), reqeust.nickname());
     }
 
-    @GetMapping("/logout/{memberId}")
+    @PostMapping("/logout/{memberId}")
     public void logout(@PathVariable Long memberId) {
         memberService.logout(memberId);
     }
