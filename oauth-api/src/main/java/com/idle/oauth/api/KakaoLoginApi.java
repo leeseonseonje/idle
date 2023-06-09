@@ -1,12 +1,11 @@
 package com.idle.oauth.api;
 
+import com.idle.oauth.api.dto.KakaoProperties;
 import com.idle.oauth.api.dto.OauthRequestDataGenerator;
-import com.idle.oauth.api.dto.TokenReissueDataGenerator;
 import com.idle.oauth.api.dto.ResponseToken;
 import com.idle.oauth.api.dto.ResponseUserId;
 import com.idle.oauth.exception.ExpiredAccessTokenException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
@@ -15,26 +14,22 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class KakaoLoginApi implements OauthLoginApi {
 
-    @Value("${oauth.kakao.grant}")
-    private String grantType;
+    private final KakaoProperties properties;
 
-    @Value("${oauth.kakao.client_id}")
-    private String clientId;
-
-    @Value("${oauth.kakao.client_secret}")
-    private String clientSecret;
-
-    @Value("${oauth.kakao.redirect_uri}")
-    private String redirectUri;
-
-    private final WebClient webClient = WebClient.create();
+    private WebClient webClient = WebClient.create();
 
     @Override
     public ResponseToken getToken(String code) {
         MultiValueMap<String, String> form = OauthRequestDataGenerator
-                .generateTokenIssueKakaoForm(grantType, clientId, clientSecret, redirectUri, code);
+                .generateTokenIssueKakaoForm(
+                        properties.getGrant(),
+                        properties.getClientId(),
+                        properties.getClientSecret(),
+                        properties.getRedirectUri(),
+                        code);
 
         return this.webClient.post()
                 .uri("https://kauth.kakao.com/oauth/token")
@@ -64,7 +59,10 @@ public class KakaoLoginApi implements OauthLoginApi {
     @Override
     public ResponseToken tokenReissue(String refreshToken) {
         MultiValueMap<String, String> form = OauthRequestDataGenerator
-                .generateTokenReissueKakaoForm("refresh_token", clientId, clientSecret, refreshToken);
+                .generateTokenReissueKakaoForm("refresh_token",
+                        properties.getClientId(),
+                        properties.getClientSecret(),
+                        refreshToken);
 
         return this.webClient.post()
                 .uri("https://kauth.kakao.com/oauth/token")
